@@ -1,5 +1,11 @@
-import {ThemeMode, ThemeState} from '@/types/type';
+import {ThemeMode} from '@/types/type';
 import {create} from 'zustand';
+interface ThemeState {
+  theme: ThemeMode;
+  isSystem: boolean;
+  setTheme: (theme: ThemeMode) => void;
+  setSystemTheme: (flag: boolean) => void;
+}
 
 const useThemeStore = create<ThemeState>(set => ({
   theme: 'light',

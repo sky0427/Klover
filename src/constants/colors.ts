@@ -32,4 +32,12 @@ const colors = {
   },
 } as const;
 
-export {colors};
+const colorHex = {
+  RED: '#EC87A5',
+  BLUE: '#B4E0FF',
+  GREEN: '#CCE6BA',
+  YELLOW: '#FFE594',
+  PURPLE: '#C4C4E7',
+} as const;
+
+export {colors, colorHex};

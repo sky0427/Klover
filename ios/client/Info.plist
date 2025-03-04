@@ -26,14 +26,25 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-	  <!-- Do not change NSAllowsArbitraryLoads to true, or you will risk app rejection! -->
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>위치 확인을 위해서 위치 접근 권한 동의가 필요합니다. 동의하면, 현재 위치 정보를 가져옵니다. 설정에서 이를 변경할 수 있습니다.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>위치 확인을 위해서 위치 접근 권한 동의가 필요합니다. 동의하면, 현재 위치 정보를 가져옵니다. 설정에서 이를 변경할 수 있습니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>위치 확인을 위해서 위치 접근 권한 동의가 필요합니다. 동의하면, 현재 위치 정보를 가져옵니다. 설정에서 이를 변경할 수 있습니다.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>위치 확인을 위해서 위치 접근 권한 동의가 필요합니다. 동의하면, 현재 위치 정보를 가져옵니다. 설정에서 이를 변경할 수 있습니다.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>프로필, 게시글 등록 및 수정 시 사진 선택을 위해 라이브러리 접근 권한이 필요합니다.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>프로필, 게시글 등록 및 수정 시 사진 선택을 위해 라이브러리 접근 권한이 필요합니다.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>프로필, 게시글 등록 및 수정 시 사진 선택을 위해 라이브러리 접근 권한이 필요합니다.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -48,5 +59,28 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansEN-Bold.ttf</string>
+		<string>NotoSansEN-Light.ttf</string>
+		<string>NotoSansEN-Medium.ttf</string>
+		<string>NotoSansEN-Regular.ttf</string>
+		<string>NotoSansEN-SemiBold.ttf</string>
+		<string>NotoSansJP-Bold.ttf</string>
+		<string>NotoSansJP-Light.ttf</string>
+		<string>NotoSansJP-Medium.ttf</string>
+		<string>NotoSansJP-Regular.ttf</string>
+		<string>NotoSansJP-SemiBold.ttf</string>
+		<string>NotoSansKR-Bold.ttf</string>
+		<string>NotoSansKR-Light.ttf</string>
+		<string>NotoSansKR-Medium.ttf</string>
+		<string>NotoSansKR-Regular.ttf</string>
+		<string>NotoSansKR-SemiBold.ttf</string>
+		<string>NotoSansSC-Bold.ttf</string>
+		<string>NotoSansSC-Light.ttf</string>
+		<string>NotoSansSC-Medium.ttf</string>
+		<string>NotoSansSC-Regular.ttf</string>
+		<string>NotoSansSC-SemiBold.ttf</string>
+	</array>
 </dict>
 </plist>

@@ -1,11 +1,13 @@
 import UIKit
 import React
+import GoogleMaps
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
 
 @main
 class AppDelegate: RCTAppDelegate {
   override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    GMSServices.provideAPIKey("AIzaSyAOWGlwDf5E7hK8XI3c9tGNtgVZufWSpxU")
     self.moduleName = "client"
     self.dependencyProvider = RCTAppDependencyProvider()
 
