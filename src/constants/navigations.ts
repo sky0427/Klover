@@ -2,6 +2,8 @@ const mainNavigation = {
   HOME: 'Home',
   EXPLORE: 'Explore',
   COMMUNITY: 'Community',
+  NOTIFICATION: 'Notification',
+  MESSAGES: 'Messages',
   PROFILE: 'Profile',
   SETTING: 'Setting',
 } as const;
