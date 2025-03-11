@@ -1,16 +1,8 @@
-import {
-  Dimensions,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-} from 'react-native';
-import React, {ReactNode} from 'react';
+import {colors} from '@/constants/colors';
 import useThemeStore from '@/store/useThemeStore';
 import {ThemeMode} from '@/types/type';
-import {colors} from '@/constants/colors';
+import React, {ReactNode} from 'react';
+import {Platform, StatusBar, StyleSheet, View, ViewStyle} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface ScreenWrapperProps {
@@ -30,7 +22,11 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({style, children}) => {
 
   return (
     <View style={[styles.container, style, {paddingTop, paddingBottom}]}>
-      <StatusBar translucent barStyle={'default'} />
+      <StatusBar
+        translucent
+        barStyle={'dark-content'}
+        backgroundColor={'transparent'}
+      />
       {children}
     </View>
   );

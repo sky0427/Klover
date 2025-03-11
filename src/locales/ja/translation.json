@@ -1,6 +1,25 @@
 {
   "currentLanguage": "現在の言語: {{language}}",
   "helloWorld": "こんにちは、世界！",
-  "signinTitle": "始めましょう",
-  "signinSubtitle": "登録またはログインして、韓国旅行に最適な方法を確認します。"
+  "loginTitle": "ようこそお越しくださいました!",
+  "loginCaption": "ログインすると、より多くの韓国観光情報を見ることができます。",
+  "loginEmailCaption": "メール",
+  "loginPasswordCaption": "パスワード",
+  "loginButton": "ログイン",
+  "GoogleLogin": "Googleでログイン",
+  "LineLogin": "Lineでログイン",
+  "recommendSignup": "アカウントをお持ちでないですか？ ",
+  "signupHighlight": "新規登録",
+  "signupCheckPasswordPlaceholder": "パスワードを再入力",
+  "signupCheckPasswordCaption": "パスワード確認",
+  "signupNickname": "ニックネーム",
+  "signupTitle": "新規登録",
+  "recommendLogin": "すでにアカウントをお持ちですか？ ",
+  "loginHighlight": "ログイン",
+  "signupButton": "会員登録",
+  "signupSuccessTitle": "登録完了",
+  "signupSuccessContent": "ログイン画面でログインしてください。",
+  "AlertOK": "確認",
+  "loginSuccessTitle": "ログイン成功",
+  "loginSuccessContent": "さん ようこそ!"
 }

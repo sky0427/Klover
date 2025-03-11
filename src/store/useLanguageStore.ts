@@ -1,22 +1,21 @@
-import {create} from 'zustand';
-import * as RNLocalize from 'react-native-localize';
-import i18n from '../utils/i18n';
 import {Country} from '@/types';
+import * as RNLocalize from 'react-native-localize';
+import {create} from 'zustand';
+import i18n from '../utils/i18n';
 
-type LanguageCode = 'en' | 'ja' | 'ko' | 'zh';
 type FontWeight = 'light' | 'regular' | 'medium' | 'semibold' | 'bold';
 
 interface LanguageState {
   language: Country;
   setLanguage: (language: Country) => void;
-  getFontFamily: (language: Country, fontWeight: FontWeight) => void;
+  getFontFamily: (language: Country, fontWeight: FontWeight) => string;
 }
 
 const getInitialLanguage = (): Country => {
   const locales = RNLocalize.getLocales();
   if (locales.length > 0) {
-    const primaryLanguage = locales[0].languageCode as Country;
-    if (['EN', 'JA', 'KO', 'ZH'].includes(primaryLanguage)) {
+    const primaryLanguage = locales[0].languageCode?.toUpperCase() as Country;
+    if (Object.values(Country).includes(primaryLanguage)) {
       return primaryLanguage;
     }
   }
@@ -29,13 +28,13 @@ const getFontFamilyByLanguage = (
 ): string => {
   const baseFontName = (() => {
     switch (language) {
-      case 'EN':
+      case Country.EN:
         return 'NotoSansEN';
-      case 'JA':
+      case Country.JA:
         return 'NotoSansJP';
-      case 'KO':
+      case Country.KO:
         return 'NotoSansKR';
-      case 'ZH':
+      case Country.ZH:
         return 'NotoSansSC';
       default:
         return 'NotoSansEN';
@@ -65,8 +64,9 @@ const getFontFamilyByLanguage = (
 const useLanguageStore = create<LanguageState>(set => ({
   language: getInitialLanguage(),
   setLanguage: language => {
-    set({language});
-    i18n.changeLanguage(language);
+    i18n.changeLanguage(language.toLowerCase()).then(() => {
+      set({language});
+    });
   },
   getFontFamily: getFontFamilyByLanguage,
 }));

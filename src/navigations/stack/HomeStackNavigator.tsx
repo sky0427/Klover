@@ -1,24 +1,18 @@
-import {colors} from '@/constants/colors';
 import {homeNavigations} from '@/constants/navigations';
-import ExploreScreen from '@/screens/explore';
-import HomeScreen from '@/screens/home';
-import useThemeStore from '@/store/useThemeStore';
+import HomeScreen from '@/screens/home/HomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
-import {LatLng} from 'react-native-maps';
 
 export type HomeStackParamList = {
-  [homeNavigations.HOME]: undefined;
+  [homeNavigations.MAIN_HOME]: undefined;
 };
 
 const Stack = createStackNavigator<HomeStackParamList>();
 
 function HomeStackNavigator() {
-  const {theme} = useThemeStore();
-
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={homeNavigations.HOME}
+        name={homeNavigations.MAIN_HOME}
         component={HomeScreen}
         options={{
           headerTitle: ' ',

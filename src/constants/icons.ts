@@ -9,6 +9,8 @@ import BookmarkFillSvg from '@/assets/icons/bookmark_fill.svg';
 import BookmarkLineSvg from '@/assets/icons/bookmark_line.svg';
 import ChatFillSvg from '@/assets/icons/chat_3_fill.svg';
 import ChatLineSvg from '@/assets/icons/chat_3_line.svg';
+import ClassifyFillSvg from '@/assets/icons/classify_fill.svg';
+import ClassifyLineSvg from '@/assets/icons/classify_line.svg';
 import CloseFillSvg from '@/assets/icons/close_fill.svg';
 import CloseLineSvg from '@/assets/icons/close_line.svg';
 import CommentFillSvg from '@/assets/icons/comment_2_fill.svg';
@@ -30,6 +32,8 @@ import GroupFillSvg from '@/assets/icons/group_3_fill.svg';
 import GroupLineSvg from '@/assets/icons/group_3_line.svg';
 import HeartFillSvg from '@/assets/icons/heart_fill.svg';
 import HeartLineSvg from '@/assets/icons/heart_line.svg';
+import HomeFillSvg from '@/assets/icons/home_3_fill.svg';
+import HomeLineSvg from '@/assets/icons/home_3_line.svg';
 import LeftFillSvg from '@/assets/icons/left_fill.svg';
 import LeftLineSvg from '@/assets/icons/left_line.svg';
 import LeftsmFillSvg from '@/assets/icons/left_small_fill.svg';
@@ -43,6 +47,8 @@ import MailFillSvg from '@/assets/icons/mail_fill.svg';
 import MailLineSvg from '@/assets/icons/mail_line.svg';
 import MapFillSvg from '@/assets/icons/map_fill.svg';
 import MapLineSvg from '@/assets/icons/map_line.svg';
+import MenuFillSvg from '@/assets/icons/menu_fill.svg';
+import MenuLineSvg from '@/assets/icons/menu_line.svg';
 import Message1FillSvg from '@/assets/icons/message_1_fill.svg';
 import Message1LineSvg from '@/assets/icons/message_1_line.svg';
 import Message3FillSvg from '@/assets/icons/message_3_fill.svg';
@@ -76,10 +82,6 @@ import UserRemoveFillSvg from '@/assets/icons/user_remove_2_fill.svg';
 import UserRemoveLineSvg from '@/assets/icons/user_remove_2_line.svg';
 import WarningFillSvg from '@/assets/icons/warning_fill.svg';
 import WarningLineSvg from '@/assets/icons/warning_line.svg';
-import HomeFillSvg from '@/assets/icons/home_3_fill.svg';
-import HomeLineSvg from '@/assets/icons/home_3_line.svg';
-import ClassifyFillSvg from '@/assets/icons/classify_fill.svg';
-import ClassifyLineSvg from '@/assets/icons/classify_line.svg';
 
 export {
   AddFillSvg,
@@ -93,6 +95,8 @@ export {
   BookmarkLineSvg,
   ChatFillSvg,
   ChatLineSvg,
+  ClassifyFillSvg,
+  ClassifyLineSvg,
   CloseFillSvg,
   CloseLineSvg,
   CommentFillSvg,
@@ -114,6 +118,8 @@ export {
   GroupLineSvg,
   HeartFillSvg,
   HeartLineSvg,
+  HomeFillSvg,
+  HomeLineSvg,
   LeftFillSvg,
   LeftLineSvg,
   LeftsmFillSvg,
@@ -127,6 +133,8 @@ export {
   MailLineSvg,
   MapFillSvg,
   MapLineSvg,
+  MenuFillSvg,
+  MenuLineSvg,
   Message1FillSvg,
   Message1LineSvg,
   Message3FillSvg,
@@ -152,16 +160,12 @@ export {
   TimelineLineSvg,
   ToggleLeftSvg,
   ToggleRightSvg,
-  UserFillSvg,
-  UserLineSvg,
   UserEditFillSvg,
   UserEditLineSvg,
+  UserFillSvg,
+  UserLineSvg,
   UserRemoveFillSvg,
   UserRemoveLineSvg,
   WarningFillSvg,
   WarningLineSvg,
-  HomeFillSvg,
-  HomeLineSvg,
-  ClassifyFillSvg,
-  ClassifyLineSvg,
 };

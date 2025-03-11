@@ -1,6 +1,25 @@
 {
   "currentLanguage": "当前语言: {{language}}",
   "helloWorld": "你好，世界！",
-  "signinTitle": "让我们开始吧",
-  "signinSubtitle": "请注册或登录以了解韩国旅行的最佳方式。"
+  "loginTitle": "欢迎光临!",
+  "loginCaption": "登录后可查找更多韩国旅游信息。",
+  "loginEmailCaption": "电子邮件",
+  "loginPasswordCaption": "密码",
+  "loginButton": "登录",
+  "GoogleLogin": "使用 Google 帐户登录",
+  "LineLogin": "使用 Line 帐户登录",
+  "recommendSignup": "没有账户？ ",
+  "signupHighlight": "注册",
+  "signupCheckPasswordPlaceholder": "再次输入密码",
+  "signupCheckPasswordCaption": "确认密码",
+  "signupNickname": "昵称",
+  "signupTitle": "新建账户",
+  "recommendLogin": "已经有账户了吗？ ",
+  "loginHighlight": "登录",
+  "signupButton": "注册账户",
+  "signupSuccessTitle": "完成注册",
+  "signupSuccessContent": "请在登录界面登录。",
+  "AlertOK": "确认",
+  "loginSuccessTitle": "登录成功",
+  "loginSuccessContent": ", 欢迎访问!"
 }

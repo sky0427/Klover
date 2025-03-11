@@ -1,71 +1,82 @@
 import CustomIcon from '@/components/shared/CustomIcon';
 import CustomText from '@/components/shared/CustomText';
 import {colors} from '@/constants/colors';
-import {mainNavigation, settingNavigations} from '@/constants/navigations';
 import useThemeStore from '@/store/useThemeStore';
 import {ThemeMode} from '@/types/type';
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
+  DrawerItem,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {useNavigation} from '@react-navigation/native';
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {Image, StyleSheet, View} from 'react-native';
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
   const {theme} = useThemeStore();
   const styles = styling(theme);
   // const {getProfileQuery} = useAuth();
 
-  const handlePressSetting = () => {
-    props.navigation.navigate(mainNavigation.SETTING, {
-      screen: settingNavigations.SETTING_HOME,
-    });
-  };
-
   return (
-    <>
+    <View style={styles.container}>
       {/* Drawer Items */}
       <DrawerContentScrollView
         {...props}
         scrollEnabled={true}
         contentContainerStyle={styles.contentContainer}>
-        <View style={styles.container}>
-          <View style={styles.userInfoContainer}>
-            <View style={styles.userImageContainer}>
-              <Image
-                source={require('@/assets/images/user-default.png')}
-                style={styles.userImage}
-              />
-            </View>
-            <CustomText style={styles.userName} fontWeight="semibold">
-              Jemma Ray
-            </CustomText>
-            <CustomText style={styles.userLocation} fontWeight="regular">
-              San Francisco, USA
-            </CustomText>
-          </View>
+        {/* User Profile Section */}
 
-          <View style={styles.drawerItemsContainer}>
-            <DrawerItemList {...props} />
+        <View style={styles.userInfoContainer}>
+          <View style={styles.userImageContainer}>
+            <Image
+              source={require('@/assets/images/user-default.png')}
+              style={styles.userImage}
+            />
           </View>
-
-          <View style={{justifyContent: 'flex-end'}}>
-            <Pressable
-              style={{
-                width: '100%',
-                padding: 20,
-                flexDirection: 'row',
-                gap: 12,
-              }}>
-              <CustomIcon name="ExitLineSvg" size={24} color="#fff" />
-              <CustomText>Logout</CustomText>
-            </Pressable>
-          </View>
+          <CustomText style={styles.userName} fontWeight="semibold">
+            Jemma Ray
+          </CustomText>
+          <CustomText style={styles.userLocation} fontWeight="regular">
+            San Francisco, USA
+          </CustomText>
         </View>
+
+        <View style={styles.drawerItemListContainer}>
+          <DrawerItemList {...props} />
+        </View>
+
+        <View style={styles.divider} />
+
+        <DrawerItem
+          key={1}
+          label={({focused}) => (
+            <View style={styles.drawerItemContainer}>
+              <CustomIcon name="Settings3FillSvg" />
+              <CustomText fontWeight={focused ? 'semibold' : 'regular'}>
+                Setting
+              </CustomText>
+            </View>
+          )}
+          onPress={() => {}}
+          activeBackgroundColor="#333"
+          style={styles.drawerItem}
+        />
+
+        <DrawerItem
+          key={2}
+          label={({focused}) => (
+            <View style={styles.drawerItemContainer}>
+              <CustomIcon name="ExitLineSvg" />
+              <CustomText fontWeight={focused ? 'semibold' : 'regular'}>
+                Logout
+              </CustomText>
+            </View>
+          )}
+          onPress={() => {}}
+          activeBackgroundColor="#333"
+          style={styles.drawerItem}
+        />
       </DrawerContentScrollView>
-    </>
+    </View>
   );
 }
 
@@ -76,7 +87,6 @@ const styling = (theme: ThemeMode) =>
     },
     contentContainer: {
       flex: 1,
-      backgroundColor: '#5843BE',
     },
     userInfoContainer: {
       alignItems: 'center',
@@ -102,23 +112,22 @@ const styling = (theme: ThemeMode) =>
       fontSize: 12,
       color: colors[theme].GRAY_100,
     },
-    drawerItemsContainer: {
+    drawerItemListContainer: {
       flex: 1,
     },
-    bottomContainer: {
-      justifyContent: 'flex-end',
-      paddingHorizontal: 24,
-      paddingVertical: 16,
-      borderTopWidth: 1,
-      borderTopColor: colors[theme].GRAY_100,
+    drawerItemContainer: {
+      flexDirection: 'row',
+      gap: 12,
     },
-    language: {
-      color: '#fff',
-      fontSize: 16,
+    divider: {
+      height: 1,
+      backgroundColor: colors[theme].GRAY_100,
+      marginVertical: 15,
+      marginHorizontal: 20,
     },
-    logout: {
-      color: '#fff',
-      fontSize: 16,
+    drawerItem: {
+      marginVertical: 3,
+      borderRadius: 16,
     },
   });
 

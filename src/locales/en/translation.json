@@ -1,6 +1,25 @@
 {
   "currentLanguage": "Current Language: {{language}}",
   "helloWorld": "Hello World!",
-  "signinTitle": "Let's get started",
-  "signinSubtitle": "Sign up or log in to find out the best way to trip Korea."
+  "loginTitle": "Welcome to Klover!",
+  "loginCaption": "Sign up or log in to find out the best way to trip korea.",
+  "loginEmailCaption": "Email",
+  "loginPasswordCaption": "Password",
+  "loginButton": "Login",
+  "GoogleLogin": "Continue with Google",
+  "LineLogin": "Continue with Line",
+  "recommendSignup": "Don't have an account? ",
+  "signupHighlight": "Sign up",
+  "signupCheckPasswordPlaceholder": "input password again",
+  "signupCheckPasswordCaption": "Check Password",
+  "signupNickname": "Nickname",
+  "signupTitle": "Create Your Account",
+  "recommendLogin": "Already have an account? ",
+  "loginHighlight": "Login",
+  "signupButton": "Join Now",
+  "signupSuccessTitle": "Complete signup",
+  "signupSuccessContent": "Let's Go to Login Screen And Login",
+  "AlertOK": "OK",
+  "loginSuccessTitle": "Login Success",
+  "loginSuccessContent": ", Welcome!"
 }

@@ -1,6 +1,25 @@
 {
   "currentLanguage": "현재 언어: {{language}}",
   "helloWorld": "안녕하세요, 세계!",
-  "signinTitle": "시작해요",
-  "signinSubtitle": "가입하거나 로그인하여 한국을 여행하는 가장 좋은 방법을 알아보세요."
+  "loginTitle": "환영합니다!",
+  "loginCaption": "로그인하시거나 가입하셔서 한국 관광 정보를 찾아보세요.",
+  "loginEmailCaption": "이메일",
+  "loginPasswordCaption": "비밀번호",
+  "loginButton": "시작하기",
+  "GoogleLogin": "구글 계정으로 시작하기",
+  "LineLogin": "라인 계정으로 시작하기",
+  "recommendSignup": "계정이 없으시다면? ",
+  "signupHighlight": "가입하기",
+  "signupCheckPasswordPlaceholder": "비밀번호를 다시 입력",
+  "signupCheckPasswordCaption": "비밀번호 확인",
+  "signupNickname": "닉네임",
+  "signupTitle": "새 계정 만들기",
+  "recommendLogin": "이미 계정이 있으신가요? ",
+  "loginHighlight": "로그인",
+  "signupButton": "회원 가입",
+  "signupSuccessTitle": "회원 가입 완료",
+  "signupSuccessContent": "로그인 화면에서 로그인해주세요",
+  "AlertOK": "확인",
+  "loginSuccessTitle": "로그인 성공",
+  "loginSuccessContent": "님 어서오세요!"
 }

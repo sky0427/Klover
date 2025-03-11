@@ -1,12 +1,11 @@
-import {View, ViewStyle, StyleSheet, Dimensions} from 'react-native';
 import React, {ReactNode} from 'react';
-import useThemeStore from '@/store/useThemeStore';
-import {ThemeMode} from '@/types/type';
+import {Dimensions, View, ViewStyle} from 'react-native';
 
 interface WrapperProps {
   style?: ViewStyle;
   children: ReactNode;
   mv?: number;
+  mb?: number;
   ph?: number;
   pv?: number;
   bgColor?: string;
@@ -17,11 +16,10 @@ const Wrapper: React.FC<WrapperProps> = ({
   children,
   bgColor,
   mv,
+  mb,
   pv,
   ph = Dimensions.get('screen').width * 0.05,
 }) => {
-  const {theme} = useThemeStore();
-  const styles = styling(theme);
   return (
     <View
       style={[
@@ -30,6 +28,7 @@ const Wrapper: React.FC<WrapperProps> = ({
           paddingVertical: pv,
           paddingHorizontal: ph,
           marginVertical: mv,
+          marginBottom: mb,
           backgroundColor: bgColor,
         },
       ]}>
@@ -37,7 +36,5 @@ const Wrapper: React.FC<WrapperProps> = ({
     </View>
   );
 };
-
-const styling = (theme: ThemeMode) => StyleSheet.create({});
 
 export default Wrapper;

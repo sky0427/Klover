@@ -15,7 +15,7 @@ const authNavigations = {
 } as const;
 
 const homeNavigations = {
-  HOME: 'Home',
+  MAIN_HOME: 'MainHome',
 } as const;
 
 const mapNavigations = {
@@ -38,10 +38,10 @@ const settingNavigations = {
 } as const;
 
 export {
-  mainNavigation,
   authNavigations,
-  homeNavigations,
-  mapNavigations,
   feedNavigations,
+  homeNavigations,
+  mainNavigation,
+  mapNavigations,
   settingNavigations,
 };

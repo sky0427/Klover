@@ -1,25 +1,19 @@
+import CustomIcon from '@/components/shared/CustomIcon';
 import {mainNavigation} from '@/constants/navigations';
+import CommunityScreen from '@/screens/community';
+import MessageScreen from '@/screens/message';
+import NotificationScreen from '@/screens/notification';
+import useThemeStore from '@/store/useThemeStore';
+import {ThemeMode} from '@/types/type';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigatorScreenParams} from '@react-navigation/native';
-import {MapStackParamList} from '../stack/MapStackNavigator';
+import {StyleSheet} from 'react-native';
+import MapTestScreen from '../root/MapTestScreen';
 import HomeStackNavigator, {
   HomeStackParamList,
 } from '../stack/HomeStackNavigator';
+import {MapStackParamList} from '../stack/MapStackNavigator';
 import CustomDrawerContent from './CustomDrawerContent';
-import {Dimensions} from 'react-native';
-import {colors} from '@/constants/colors';
-import MapTestScreen from '../root/MapTestScreen';
-import {
-  CompassFillSvg,
-  CompassLineSvg,
-  HomeFillSvg,
-  HomeLineSvg,
-} from '@/constants/icons';
-import CustomIcon from '@/components/shared/CustomIcon';
-import CommunityScreen from '@/screens/community';
-import SettingScreen from '@/screens/setting';
-import NotificationScreen from '@/screens/notification';
-import MessageScreen from '@/screens/message';
 
 export type MainDrawerParamList = {
   [mainNavigation.HOME]: NavigatorScreenParams<HomeStackParamList>;
@@ -33,74 +27,102 @@ export type MainDrawerParamList = {
 const Drawer = createDrawerNavigator<MainDrawerParamList>();
 
 function MainDrawerNavigator() {
+  const {theme} = useThemeStore();
+  const styles = styling(theme);
+
   return (
     <Drawer.Navigator
       initialRouteName={mainNavigation.HOME}
       drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={({route}) => ({
         headerShown: false,
-        drawerActiveTintColor: '#f8f8f8',
-        drawerActiveBackgroundColor: '#A78BFA',
-        drawerLabelStyle: {
-          fontSize: 16,
-        },
-        drawerItemStyle: {
-          padding: 3,
-          marginBottom: 12,
-        },
+        drawerStyle: styles.drawer,
+        drawerType: 'front',
+        overlayColor: 'rgba(0, 0, 0, 0.5)',
+        swipeEdgeWidth: 100,
       })}>
       <Drawer.Screen
         name={mainNavigation.HOME}
         component={HomeStackNavigator}
-        options={{
+        options={({focused}: any) => ({
           title: 'Home',
-          drawerIcon: () => (
-            <CustomIcon name="HomeLineSvg" size={24} color="#fff" />
+          drawerIcon: ({color, size}) => (
+            <CustomIcon
+              name={focused ? 'HomeFillSvg' : 'HomeLineSvg'}
+              size={size}
+              color={color}
+            />
           ),
-        }}
+        })}
       />
       <Drawer.Screen
         name={mainNavigation.EXPLORE}
         component={MapTestScreen}
-        options={{
+        options={({focused}: any) => ({
           title: 'Explore',
-          drawerIcon: () => (
-            <CustomIcon name="CompassLineSvg" size={24} color="#fff" />
+          drawerIcon: ({color, size}) => (
+            <CustomIcon
+              name={focused ? 'CompassFillSvg' : 'CompassLineSvg'}
+              size={size}
+              color={color}
+            />
           ),
-        }}
+        })}
       />
       <Drawer.Screen
         name={mainNavigation.COMMUNITY}
         component={CommunityScreen}
-        options={{
+        options={({focused}: any) => ({
           title: 'Community',
-          drawerIcon: () => (
-            <CustomIcon name="Message1LineSvg" size={24} color="#fff" />
+          drawerIcon: ({color, size}) => (
+            <CustomIcon
+              name={focused ? 'Message1FillSvg' : 'Message1LineSvg'}
+              size={size}
+              color={color}
+            />
           ),
-        }}
+        })}
       />
       <Drawer.Screen
         name={mainNavigation.NOTIFICATION}
         component={NotificationScreen}
-        options={{
+        options={({focused}: any) => ({
           title: 'Notification',
-          drawerIcon: () => (
-            <CustomIcon name="AnnounceLineSvg" size={24} color="#fff" />
+          drawerIcon: ({color, size}) => (
+            <CustomIcon
+              name={focused ? 'AnnounceFillSvg' : 'AnnounceLineSvg'}
+              size={size}
+              color={color}
+            />
           ),
-        }}
+        })}
       />
       <Drawer.Screen
         name={mainNavigation.MESSAGES}
         component={MessageScreen}
-        options={{
+        options={({focused}: any) => ({
           title: 'Messages',
-          drawerIcon: () => (
-            <CustomIcon name="SendLineSvg" size={24} color="#fff" />
+          drawerIcon: ({color, size}) => (
+            <CustomIcon
+              name={focused ? 'SendLineSvg' : 'SendFillSvg'}
+              size={size}
+              color={color}
+            />
           ),
-        }}
+        })}
       />
     </Drawer.Navigator>
   );
 }
+
+const styling = (theme: ThemeMode) =>
+  StyleSheet.create({
+    drawer: {
+      width: '75%',
+      backgroundColor: 'rgba(88, 67, 190, 0.9)',
+      borderTopRightRadius: 16,
+      borderTopLeftRadius: 16,
+    },
+  });
 
 export default MainDrawerNavigator;

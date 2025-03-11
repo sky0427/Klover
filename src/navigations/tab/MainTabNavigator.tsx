@@ -1,4 +1,3 @@
-import {colors} from '@/constants/colors';
 import {
   CompassFillSvg,
   CompassLineSvg,
@@ -12,7 +11,7 @@ import {
 import {mainNavigation} from '@/constants/navigations';
 import CommunityScreen from '@/screens/community';
 import ExploreScreen from '@/screens/explore';
-import HomeScreen from '@/screens/home';
+import HomeScreen from '@/screens/home/HomeScreen';
 import ProfileScreen from '@/screens/profile';
 import useThemeStore from '@/store/useThemeStore';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';

@@ -1,14 +1,13 @@
 import RetryErrorBoundary from '@/components/shared/RetryErrorBoundary';
+import MainDrawerNavigator from '../drawer/MainDrawerNavigator';
 import AuthStackNavigator from '../stack/AuthStackNavigator';
-import SearchTourPostsScreen from '@/screens/home/SearchTourPostsScreen';
-import TestScreen from './TestScreen';
 
 function RootNavigator() {
   const isLogin = true;
 
   return (
     <RetryErrorBoundary>
-      {isLogin ? <SearchTourPostsScreen /> : <AuthStackNavigator />}
+      {isLogin ? <MainDrawerNavigator /> : <AuthStackNavigator />}
     </RetryErrorBoundary>
   );
 }
