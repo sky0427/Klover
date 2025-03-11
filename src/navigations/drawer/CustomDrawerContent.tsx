@@ -57,7 +57,6 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
                 width: '100%',
                 padding: 20,
                 flexDirection: 'row',
-                backgroundColor: 'blue',
                 gap: 12,
               }}>
               <CustomIcon name="ExitLineSvg" size={24} color="#fff" />

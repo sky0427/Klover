@@ -1,20 +1,49 @@
-export type Country =
-  | 'KorService1'
-  | 'EngService1'
-  | 'JpnService1'
-  | 'ChsService1';
+export enum Country {
+  KO = 'KO',
+  EN = 'EN',
+  JA = 'JA',
+  ZH = 'ZH',
+}
 
-export type Area = 'SEOUL' | 'INCHEON' | 'BUSAN' | 'JEJU';
+export enum Area {
+  SEOUL = 'SEOUL',
+  BUSAN = 'BUSAN',
+  JEJU = 'JEJU',
+  INCHEON = 'INCHEON',
+}
 
-export type ContentType =
-  | 'ATTRACTION'
-  | 'CULTURAL_FACILITY'
-  | 'DINING'
-  | 'ACCOMMODATION'
-  | 'ACTIVITY'
-  | 'SHOPPING'
-  | 'EVENT';
+export enum AreaCode {
+  SEOUL = '1',
+  BUSAN = '6',
+  JEJU = '39',
+  INCHEON = '2',
+}
 
-export type TourPostTheme = 'EXOTIC' | 'HEALING' | 'TRADITIONAL' | 'ACTIVE';
+export enum ContentType {
+  Attraction = 'ATTRACTION',
+  Cultural_Facility = 'CURTURAL_FACILITY',
+  Dining = 'DINING',
+  Accommodation = 'ACCOMMODATION',
+  Activity = 'ACTIVITY',
+  Shopping = 'SHOPPING',
+  Event = 'EVENT',
+}
 
-export type TourPostSort = 'REVIEW_COUNT' | 'RATING_AVERAGE' | 'DISTANCE';
+export enum TourPostSort {
+  Review_Count = 'REVIEW_COUNT',
+  Rating_Average = 'RATING_AVERAGE',
+  Distance = 'DISTANCE',
+}
+
+export enum TourPostTheme {
+  Exotic = 'EXOTIC',
+  Healing = 'HEALING',
+  Traditional = 'TRADITIONAL',
+  Active = 'ACTIVE',
+}
+
+export enum CommPostSort {
+  Comment_Count = 'COMMENT_COUNT',
+  Like_Count = 'LIKE_COUNT',
+  Distance = 'DISTANCE',
+}

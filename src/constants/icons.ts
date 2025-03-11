@@ -78,6 +78,8 @@ import WarningFillSvg from '@/assets/icons/warning_fill.svg';
 import WarningLineSvg from '@/assets/icons/warning_line.svg';
 import HomeFillSvg from '@/assets/icons/home_3_fill.svg';
 import HomeLineSvg from '@/assets/icons/home_3_line.svg';
+import ClassifyFillSvg from '@/assets/icons/classify_fill.svg';
+import ClassifyLineSvg from '@/assets/icons/classify_line.svg';
 
 export {
   AddFillSvg,
@@ -160,4 +162,6 @@ export {
   WarningLineSvg,
   HomeFillSvg,
   HomeLineSvg,
+  ClassifyFillSvg,
+  ClassifyLineSvg,
 };

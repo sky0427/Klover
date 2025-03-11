@@ -1,4 +1,6 @@
 {
   "currentLanguage": "現在の言語: {{language}}",
-  "helloWorld": "こんにちは、世界！"
+  "helloWorld": "こんにちは、世界！",
+  "signinTitle": "始めましょう",
+  "signinSubtitle": "登録またはログインして、韓国旅行に最適な方法を確認します。"
 }

@@ -40,7 +40,7 @@ const CustomButton = ({
 const styling = (theme: ThemeMode) =>
   StyleSheet.create({
     container: {
-      borderRadius: 3,
+      borderRadius: 16,
       flexDirection: 'row',
       justifyContent: 'center',
     },

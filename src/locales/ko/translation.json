@@ -1,4 +1,6 @@
 {
   "currentLanguage": "현재 언어: {{language}}",
-  "helloWorld": "안녕하세요, 세계!"
+  "helloWorld": "안녕하세요, 세계!",
+  "signinTitle": "시작해요",
+  "signinSubtitle": "가입하거나 로그인하여 한국을 여행하는 가장 좋은 방법을 알아보세요."
 }

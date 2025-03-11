@@ -2,11 +2,14 @@ import axios from 'axios';
 import {Platform} from 'react-native';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://13.125.187.173:8080',
+  baseURL: 'https://api.klover.letzgo.site/api/v1',
   // Platform.OS === 'android'
   //   ? 'http://10.0.2.2:8080'
   //   : 'http://localhost:8080',
-  withCredentials: true,
+  // withCredentials: true,
+  // headers: {
+  //   'Content-Type': 'application/json',
+  // },
 });
 
 const setHeader = (key: string, value: string) => {

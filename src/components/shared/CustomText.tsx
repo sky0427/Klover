@@ -6,6 +6,8 @@ type FontWeight = 'light' | 'regular' | 'medium' | 'semibold' | 'bold';
 interface CustomTextProps extends TextProps {
   style?: TextStyle | TextStyle[];
   fontWeight?: FontWeight;
+  lineHeightPercentage?: number;
+  letterSpacingPercentage?: number;
 }
 
 const CustomText: React.FC<CustomTextProps> = ({

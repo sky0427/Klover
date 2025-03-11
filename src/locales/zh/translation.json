@@ -1,4 +1,6 @@
 {
   "currentLanguage": "当前语言: {{language}}",
-  "helloWorld": "你好，世界！"
+  "helloWorld": "你好，世界！",
+  "signinTitle": "让我们开始吧",
+  "signinSubtitle": "请注册或登录以了解韩国旅行的最佳方式。"
 }

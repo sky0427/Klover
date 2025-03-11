@@ -1,10 +1,10 @@
-import {DetailTourPost, TourPost} from '@/types/domain';
+import {DetailTourPost, TourPostDto} from '@/types/domain';
 import {create} from 'zustand';
 
 interface TourPostState {
-  tourPosts: TourPost[];
+  tourPosts: TourPostDto[];
   detailTourPost: DetailTourPost | null;
-  setTourPosts: (tourPosts: TourPost[]) => void;
+  setTourPosts: (tourPosts: TourPostDto[]) => void;
   setDetailTourPost: (detailTourPost: DetailTourPost | null) => void;
 }
 

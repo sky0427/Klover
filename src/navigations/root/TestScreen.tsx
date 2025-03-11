@@ -6,6 +6,7 @@ import {useTranslation} from 'react-i18next';
 import '@/utils/i18n';
 import CustomText from '@/components/shared/CustomText';
 import useLanguageStore from '@/store/useLanguageStore';
+import {Country} from '@/types';
 
 const TestScreen = () => {
   const {language, setLanguage} = useLanguageStore();
@@ -42,10 +43,10 @@ const TestScreen = () => {
         </CustomText>
 
         <View style={styles.buttonContainer}>
-          <Button title="English" onPress={() => setLanguage('en')} />
-          <Button title="Japanese" onPress={() => setLanguage('ja')} />
-          <Button title="Korean" onPress={() => setLanguage('ko')} />
-          <Button title="Chinese" onPress={() => setLanguage('zh')} />
+          <Button title="English" onPress={() => setLanguage(Country.EN)} />
+          <Button title="Japanese" onPress={() => setLanguage(Country.JA)} />
+          <Button title="Korean" onPress={() => setLanguage(Country.KO)} />
+          <Button title="Chinese" onPress={() => setLanguage(Country.ZH)} />
         </View>
       </ScrollView>
     </SafeAreaView>

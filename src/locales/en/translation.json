@@ -1,4 +1,6 @@
 {
   "currentLanguage": "Current Language: {{language}}",
-  "helloWorld": "Hello World!"
+  "helloWorld": "Hello World!",
+  "signinTitle": "Let's get started",
+  "signinSubtitle": "Sign up or log in to find out the best way to trip Korea."
 }

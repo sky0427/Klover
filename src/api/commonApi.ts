@@ -1,13 +1,13 @@
-import {ApiResponse} from '@/types/type';
+import {ApiResponse, KloverPage} from '@/types/domain';
 import {axiosInstance} from '@/utils/axios';
 import {AxiosResponse, AxiosRequestConfig} from 'axios';
 
 const GET = async <T>(
   url: string,
   config?: AxiosRequestConfig,
-): Promise<AxiosResponse<ApiResponse<T>>> => {
-  const response = await axiosInstance.get(url, config);
-  return response;
+): Promise<ApiResponse<T>> => {
+  const response = await axiosInstance.get<ApiResponse<T>>(url, config);
+  return response.data;
 };
 
 const POST = async <T>(
@@ -16,7 +16,7 @@ const POST = async <T>(
   config?: AxiosRequestConfig,
 ): Promise<AxiosResponse<ApiResponse<T>>> => {
   const response = await axiosInstance.post(url, data, config);
-  return response;
+  return response?.data;
 };
 
 export {GET, POST};
