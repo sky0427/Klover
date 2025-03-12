@@ -1,7 +1,9 @@
-import AuthInputField from '@/components/shared/AuthInputField';
+import FormField from '@/components/auth/FormField';
+import CustomButton from '@/components/shared/CustomButton';
 import CustomIcon from '@/components/shared/CustomIcon';
 import CustomText from '@/components/shared/CustomText';
 import ScreenWrapper from '@/components/shared/ScreenWrapper';
+import Wrapper from '@/components/shared/Wrapper';
 import {colors} from '@/constants/colors';
 import {authNavigations} from '@/constants/navigations';
 import {
@@ -11,121 +13,104 @@ import {
 } from '@/hooks/react-query/useAuthMutations';
 import useLanguageStore from '@/store/useLanguageStore';
 import useThemeStore from '@/store/useThemeStore';
-import {Country} from '@/types';
+import {LoginRequest} from '@/types/auth';
 import {ThemeMode} from '@/types/type';
 import {useNavigation} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const SigninScreen = () => {
-  const {language, setLanguage} = useLanguageStore();
-  const {t, i18n: i18nInstance} = useTranslation();
   const {theme} = useThemeStore();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const {mutate: severLoginMutate} = useLoginMutation();
+  const styles = styling(theme);
+  const navigation = useNavigation();
+  const {language} = useLanguageStore();
+  const {t, i18n: i18nInstance} = useTranslation();
+  const [isSubmitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState<LoginRequest>({
+    email: '',
+    password: '',
+  });
+
+  const {mutate: localLoginMutate} = useLoginMutation();
   const {mutate: googleLoginMutate} = useGoogleLoginMutation();
   const {mutate: lineLoginMutate} = useLineLoginMutation();
 
-  const styles = styling(theme);
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    // zustand 의 language 가 변경될때, i18next 의 language 도 함께 변경.
-    i18nInstance.changeLanguage(language);
-  }, [language, i18nInstance]);
+  const submit = async () => {
+    if (form.email === '' || form.password === '') {
+    }
+  };
 
   return (
-    <ScreenWrapper>
-      <KeyboardAwareScrollView style={styles.container}>
-        {/* Header */}
-        <CustomText
-          fontWeight="regular"
-          style={language !== Country.EN ? styles.title : styles.titleEN}>
-          {t('loginTitle', {language})}
-        </CustomText>
-        <CustomText
-          fontWeight="regular"
-          style={language !== Country.EN ? styles.subtitle : styles.subtitleEN}>
-          {t('loginCaption', {language})}
-        </CustomText>
-
-        {/* Email Input */}
-        <CustomText fontWeight="regular" style={styles.label}>
-          {t('loginEmailCaption', {language})}
-        </CustomText>
-
-        <AuthInputField
-          icon="MailLineSvg"
-          placeholder={t('loginEmailCaption', {language})}
-          placeholderTextColor="#808080"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-        />
-
-        {/* Password Input */}
-        <CustomText fontWeight="regular" style={styles.label}>
-          {t('loginPasswordCaption', {language})}
-        </CustomText>
-        <AuthInputField
-          icon="LockLineSvg"
-          placeholder={t('loginPasswordCaption', {language})}
-          secureTextEntry={true}
-          placeholderTextColor="#808080"
-          value={password}
-          onChangeText={setPassword}
-        />
-
-        {/* Get Started Button */}
-        <TouchableOpacity
-          style={language !== Country.EN ? styles.button : styles.buttonEN}
-          onPress={() => severLoginMutate({email, password})}>
-          <CustomText fontWeight="regular" style={styles.buttonText}>
-            {t('loginButton', {language})}
+    <ScreenWrapper style={styles.container}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.contentContainer}>
+        <Wrapper mb={36}>
+          <CustomText fontWeight="bold" style={styles.title}>
+            {t('loginTitle', {language})}
           </CustomText>
-        </TouchableOpacity>
-
-        {/* Or Separator */}
-        <Text style={language !== Country.EN ? styles.or : styles.orEN}>
-          OR
-        </Text>
-
-        {/* Continue with Google */}
-        <TouchableOpacity
-          style={styles.socialButton}
-          onPress={() => googleLoginMutate()}>
-          <CustomIcon name="GoogleSvg" style={styles.socialIcon} />
-          <CustomText fontWeight="regular" style={styles.socialButtonText}>
-            {t('GoogleLogin', {language})}
+          <CustomText fontWeight="medium" style={styles.subtitle}>
+            {t('loginCaption', {language})}
           </CustomText>
-        </TouchableOpacity>
+        </Wrapper>
 
-        {/* Continue with Line */}
-        <TouchableOpacity
-          style={styles.socialButton}
-          onPress={() => lineLoginMutate()}>
-          <CustomIcon name="LineSvg" style={styles.socialIcon} />
-          <CustomText fontWeight="regular" style={styles.socialButtonText}>
-            {t('LineLogin', {language})}
-          </CustomText>
-        </TouchableOpacity>
+        <Wrapper mb={36}>
+          <FormField
+            title={t('loginEmailCaption', {language})}
+            value={form.email}
+            handleChangeText={e => {
+              setForm({...form, email: e});
+            }}
+          />
 
-        {/* Sign Up Menu */}
-        <View
-          style={
-            language !== Country.EN
-              ? styles.signupContainer
-              : styles.signupContainerEN
-          }>
-          <CustomText fontWeight="regular" style={styles.signupText}>
+          <FormField
+            title={t('loginPasswordCaption', {language})}
+            value={form.password}
+            placeholder=""
+            handleChangeText={e => {
+              setForm({...form, password: e});
+            }}
+          />
+        </Wrapper>
+
+        <Wrapper>
+          <CustomButton
+            label={t('loginButton', {language})}
+            onPress={() => localLoginMutate(form)}
+          />
+        </Wrapper>
+
+        <Wrapper mv={36} style={styles.divider}>
+          <View style={styles.dividerLine} />
+          <Text style={styles.or}>OR</Text>
+          <View style={styles.dividerLine} />
+        </Wrapper>
+
+        <Wrapper mb={36} style={styles.socialButtonContainer}>
+          <TouchableOpacity
+            style={styles.socialButton}
+            onPress={() => googleLoginMutate()}>
+            <CustomIcon
+              name="GoogleSvg"
+              size={32}
+              color={colors[theme].BLACK}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.socialButton}
+            onPress={() => lineLoginMutate()}>
+            <CustomIcon name="LineSvg" size={32} color={colors[theme].BLACK} />
+          </TouchableOpacity>
+        </Wrapper>
+
+        <Wrapper style={styles.signupContainer}>
+          <CustomText fontWeight="medium" style={styles.signupText}>
             {t('recommendSignup', {language})}
           </CustomText>
           <TouchableOpacity>
             <CustomText
-              fontWeight="regular"
+              fontWeight="bold"
               style={styles.signupLink}
               onPress={() =>
                 navigation.navigate(authNavigations.SIGNUP as never)
@@ -133,7 +118,7 @@ const SigninScreen = () => {
               {t('signupHighlight', {language})}
             </CustomText>
           </TouchableOpacity>
-        </View>
+        </Wrapper>
       </KeyboardAwareScrollView>
     </ScreenWrapper>
   );
@@ -143,135 +128,69 @@ const styling = (theme: ThemeMode) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors[theme].BACKGROUND, //  Background color
-      padding: 20,
-      paddingTop: 50, // Adjust top padding as needed
+    },
+    contentContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      paddingVertical: 36,
     },
     title: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      color: colors[theme].GRAY_500,
-      marginBottom: 5,
-      textAlign: 'left',
-    },
-    titleEN: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      color: colors[theme].GRAY_500,
-      marginBottom: 10,
-      marginTop: 30,
-      textAlign: 'left',
+      fontSize: 28,
+      color: colors[theme].BLACK,
+      marginBottom: 12,
     },
     subtitle: {
-      fontSize: 16,
-      color: colors[theme].GRAY_500,
-      marginBottom: 5,
-      textAlign: 'left',
-    },
-    subtitleEN: {
-      fontSize: 16,
-      color: colors[theme].GRAY_500,
-      marginBottom: 20,
-      textAlign: 'left',
-    },
-    label: {
-      fontSize: 14,
-      color: colors[theme].GRAY_500,
-      marginBottom: 1,
-      textAlign: 'left',
-    },
-    inputContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      backgroundColor: colors[theme].BACKGROUND,
-      borderRadius: 10,
-      marginBottom: 20,
-      paddingHorizontal: 10,
-      borderWidth: 1,
-      borderColor: '#ddd',
-    },
-    icon: {
-      width: 20,
-      height: 20,
-      marginRight: 10,
-    },
-    input: {
-      flex: 1,
-      height: 40,
-      fontSize: 16,
-    },
-    button: {
-      backgroundColor: colors[theme].PURPLE_500, // button color
-      paddingVertical: 15,
-      borderRadius: 10,
-      alignItems: 'center',
-      marginBottom: 20,
-    },
-    buttonEN: {
-      backgroundColor: colors[theme].PURPLE_500, // button color
-      paddingVertical: 15,
-      borderRadius: 10,
-      alignItems: 'center',
-      marginTop: 10,
-      marginBottom: 30,
-    },
-    buttonText: {
-      color: colors[theme].WHITE,
       fontSize: 18,
-      fontWeight: 'bold',
+      color: colors[theme].TEXT,
+      width: '85%',
     },
     or: {
       fontSize: 16,
-      color: colors[theme].GRAY_500,
-      textAlign: 'center',
-      marginBottom: 20,
+      color: colors[theme].TEXT,
     },
-    orEN: {
-      fontSize: 16,
-      color: colors[theme].GRAY_500,
-      textAlign: 'center',
-      marginBottom: 30,
+    divider: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderRadius: 50,
+      gap: 12,
     },
-    socialButton: {
+    dividerLine: {
+      flex: 1,
+      height: 1,
+      marginHorizontal: 6,
+      backgroundColor: colors[theme].BORDER,
+    },
+    socialButtonContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors[theme].WHITE,
-      borderRadius: 10,
-      paddingVertical: 15,
-      paddingHorizontal: 20,
-      marginBottom: 15,
-      borderWidth: 1,
-      borderColor: '#ddd',
+      gap: 16,
     },
-    socialIcon: {
-      width: 20,
-      height: 20,
-      marginRight: 10,
-    },
-    socialButtonText: {
-      fontSize: 16,
-      color: colors[theme].BLACK,
+    socialButton: {
+      width: 64,
+      height: 64,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderWidth: 2,
+      borderColor: colors[theme].BORDER,
+      borderRadius: 16,
+      // backgroundColor: colors[theme].INPUT,
     },
     signupContainer: {
       flexDirection: 'row',
       justifyContent: 'center',
-      marginTop: 20,
       alignItems: 'center',
-    },
-    signupContainerEN: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      marginTop: 20,
+      gap: 6,
     },
     signupText: {
-      fontSize: 14,
-      color: colors[theme].BLACK,
+      fontSize: 15,
+      color: colors[theme].TEXT,
     },
     signupLink: {
-      fontSize: 14,
-      color: colors[theme].PURPLE_500, // Signup link color
-      fontWeight: 'bold',
+      fontSize: 15,
+      color: colors[theme].PRIMARY,
     },
   });
 

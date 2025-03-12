@@ -27,6 +27,8 @@ import EditFillSvg from '@/assets/icons/edit_fill.svg';
 import EditLineSvg from '@/assets/icons/edit_line.svg';
 import ExitFillSvg from '@/assets/icons/exit_fill.svg';
 import ExitLineSvg from '@/assets/icons/exit_line.svg';
+import EyeCloseLineSvg from '@/assets/icons/eye_close_line.svg';
+import EyeLineSvg from '@/assets/icons/eye_line.svg';
 import GoogleSvg from '@/assets/icons/google_fill.svg';
 import GroupFillSvg from '@/assets/icons/group_3_fill.svg';
 import GroupLineSvg from '@/assets/icons/group_3_line.svg';
@@ -113,6 +115,8 @@ export {
   EditLineSvg,
   ExitFillSvg,
   ExitLineSvg,
+  EyeCloseLineSvg,
+  EyeLineSvg,
   GoogleSvg,
   GroupFillSvg,
   GroupLineSvg,

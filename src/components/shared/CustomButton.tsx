@@ -1,8 +1,26 @@
 import {colors} from '@/constants/colors';
 import useThemeStore from '@/store/useThemeStore';
-import {CustomButtonProps, ThemeMode} from '@/types/type';
-import React from 'react';
-import {Dimensions, Pressable, StyleSheet, Text, View} from 'react-native';
+import {ThemeMode} from '@/types/type';
+import React, {ReactNode} from 'react';
+import {
+  ActivityIndicator,
+  Dimensions,
+  Pressable,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
+import CustomText from './CustomText';
+
+interface CustomButtonProps {
+  label: string;
+  variant?: 'filled' | 'outlined';
+  inValid?: boolean;
+  style?: ViewStyle;
+  icon?: ReactNode;
+  isLoading?: boolean;
+  onPress?: () => void;
+}
 
 const deviceHeight = Dimensions.get('screen').height;
 
@@ -10,15 +28,18 @@ const CustomButton = ({
   label,
   variant = 'filled',
   inValid = false,
-  style = null,
-  textStyle = null,
+  style,
   icon = null,
+  isLoading = false,
+  onPress,
   ...props
 }: CustomButtonProps) => {
   const {theme} = useThemeStore();
   const styles = styling(theme);
+
   return (
     <Pressable
+      onPress={onPress}
       disabled={inValid}
       style={({pressed}) => [
         styles.container,
@@ -29,10 +50,22 @@ const CustomButton = ({
       {...props}>
       <View style={styles.size}>
         {icon}
-        <Text style={[styles.text, styles[`${variant}Text`], textStyle]}>
+        <CustomText
+          fontWeight="semibold"
+          style={[styles.text, styles[`${variant}Text`]]}>
           {label}
-        </Text>
+        </CustomText>
       </View>
+
+      {isLoading && (
+        <ActivityIndicator
+          animating={isLoading}
+          color={
+            variant === 'filled' ? colors[theme].WHITE : colors[theme].PRIMARY
+          }
+          size="small"
+        />
+      )}
     </Pressable>
   );
 };
@@ -40,6 +73,7 @@ const CustomButton = ({
 const styling = (theme: ThemeMode) =>
   StyleSheet.create({
     container: {
+      height: 56,
       borderRadius: 16,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -52,15 +86,16 @@ const styling = (theme: ThemeMode) =>
     },
     outlined: {
       borderColor: colors[theme].PRIMARY,
-      borderWidth: 1,
+      borderWidth: 2,
     },
     filledPressed: {
-      backgroundColor: colors[theme].SECONDARY,
+      backgroundColor: colors[theme].PRIMARY,
+      opacity: 0.8,
     },
     outlinedPressed: {
-      borderColor: colors[theme].SECONDARY,
+      borderColor: colors[theme].PRIMARY,
       borderWidth: 1,
-      opacity: 0.5,
+      opacity: 0.8,
     },
     size: {
       width: '100%',
@@ -72,10 +107,9 @@ const styling = (theme: ThemeMode) =>
     },
     text: {
       fontSize: 16,
-      fontWeight: '700',
     },
     filledText: {
-      color: colors[theme].GRAY_100,
+      color: colors[theme].UNCHANGE_WHITE,
     },
     outlinedText: {
       color: colors[theme].PRIMARY,

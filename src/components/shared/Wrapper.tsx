@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {Dimensions, View, ViewStyle} from 'react-native';
+import {Dimensions, StyleSheet, View, ViewStyle} from 'react-native';
 
 interface WrapperProps {
   style?: ViewStyle;
@@ -23,6 +23,7 @@ const Wrapper: React.FC<WrapperProps> = ({
   return (
     <View
       style={[
+        styles.container,
         {
           paddingVertical: pv,
           paddingHorizontal: ph,
@@ -36,5 +37,11 @@ const Wrapper: React.FC<WrapperProps> = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
+});
 
 export default Wrapper;

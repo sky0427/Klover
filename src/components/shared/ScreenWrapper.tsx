@@ -6,7 +6,7 @@ import {Platform, StatusBar, StyleSheet, View, ViewStyle} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 interface ScreenWrapperProps {
-  style?: ViewStyle;
+  style?: ViewStyle | ViewStyle[];
   children: ReactNode;
 }
 

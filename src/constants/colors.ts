@@ -1,33 +1,44 @@
 const common = {
-  WHITE: '#FFFFFF',
-  BLACK: '#111111',
+  UNCHANGE_WHITE: '#FFFFFF',
+  UNCHANGE_BLACK: '#111111',
   PURPLE_100: '#F2F0FC',
   PURPLE_300: '#A78BFA',
   PURPLE_500: '#5843BE',
-  DANGER: '#F44336',
+  DANGER: '#DC3545',
+  SUCCESS: '#28A745',
 };
 
 const colors = {
   light: {
+    WHITE: '#FFFFFF',
     BACKGROUND: '#F2F0FC',
     PRIMARY: '#5843BE',
-    SECONDARY: '#A78BFA',
-    TEXT: '#6D6D6D',
+    SECONDARY: '#FF9C01',
+    BORDER: '#D3D3D3',
+    INPUT: '#FAFAFA',
+    TEXT: '#6C757D',
     GRAY_100: '#F8F8F8',
     GRAY_300: '#BDBDBD',
-    GRAY_500: '#545454',
-    GRAY_700: '#333333',
+    GRAY_500: '#6D6D6D',
+    GRAY_700: '#545454',
+    GRAY_900: '#333333',
+    BLACK: '#111111',
     ...common,
   },
   dark: {
-    BACKGROUND: '#121212',
-    PRIMARY: '#B794F4 ',
-    SECONDARY: '#D8B4FE ',
-    TEXT: '#F5F5F5 ',
+    WHITE: '#111111',
+    BACKGROUND: '#161622',
+    PRIMARY: '#7B68EE',
+    SECONDARY: '#FFB347',
+    BORDER: '#232533',
+    INPUT: '#1E1E2D',
+    TEXT: '#CDCDE0',
     GRAY_100: '#333333',
-    GRAY_200: '#545454',
-    GRAY_500: '#BDBDBD',
-    GRAY_700: '#F8F8F8',
+    GRAY_300: '#545454',
+    GRAY_500: '#7b7b8b',
+    GRAY_700: '#BDBDBD',
+    GRAY_900: '#F8F8F8',
+    BLACK: '#FFFFFF',
     ...common,
   },
 } as const;
@@ -40,4 +51,4 @@ const colorHex = {
   PURPLE: '#C4C4E7',
 } as const;
 
-export {colors, colorHex};
+export {colorHex, colors};
