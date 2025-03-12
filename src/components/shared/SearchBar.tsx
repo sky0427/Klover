@@ -76,7 +76,7 @@ const styling = (theme: ThemeMode) =>
       borderWidth: 1.5,
       backgroundColor: colors[theme].GRAY_100,
       borderColor: colors[theme].PRIMARY,
-      height: 64,
+      height: 56,
       gap: 12,
     },
     text: {

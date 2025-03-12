@@ -1,9 +1,11 @@
 import {homeNavigations} from '@/constants/navigations';
 import HomeScreen from '@/screens/home/HomeScreen';
+import SearchTourPostsScreen from '@/screens/home/SearchTourPostsScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 
 export type HomeStackParamList = {
   [homeNavigations.MAIN_HOME]: undefined;
+  [homeNavigations.SEARCH]: undefined;
 };
 
 const Stack = createStackNavigator<HomeStackParamList>();
@@ -19,14 +21,15 @@ function HomeStackNavigator() {
           headerShown: false,
         }}
       />
-      {/* <Stack.Screen
-        name={mapNavigations.ADD_POST}
-        component={AddPostScreen}
+      <Stack.Screen
+        name={homeNavigations.SEARCH}
+        component={SearchTourPostsScreen}
         options={{
-          headerTitle: '장소 추가',
+          headerTitle: 'Search',
+          headerShown: false,
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name={mapNavigations.SEARCH_LOCATION}
         component={SearchLocationScreen}
         options={{

@@ -1,3 +1,5 @@
+import {ImageOrVideo} from 'react-native-image-crop-picker';
+
 export interface ApiResponse<T> {
   returnCode: string;
   returnMessage: string;
@@ -16,6 +18,7 @@ export interface KloverPage<T> {
 export interface TourPostDto {
   contentId: number;
   commonPlaceId: number;
+  avgRating: number;
   title: string;
   overview: string;
   addr1: string;
@@ -30,7 +33,7 @@ export interface DetailTourPost {
   avgRating: number;
   title: string;
   addr1: string;
-  firstImage?: string;
+  firstImage?: string | undefined;
   homepage?: string;
   mapX: number;
   mapY: number;

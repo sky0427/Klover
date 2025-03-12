@@ -3,6 +3,7 @@ import React
 import GoogleMaps
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
+import RNLine
 
 @main
 class AppDelegate: RCTAppDelegate {
@@ -28,5 +29,9 @@ class AppDelegate: RCTAppDelegate {
 #else
     Bundle.main.url(forResource: "main", withExtension: "jsbundle")
 #endif
+  }
+
+  override func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    return LineLogin.application(app, open: url, options: options)
   }
 }

@@ -23,7 +23,6 @@ const Wrapper: React.FC<WrapperProps> = ({
   return (
     <View
       style={[
-        style,
         {
           paddingVertical: pv,
           paddingHorizontal: ph,
@@ -31,6 +30,7 @@ const Wrapper: React.FC<WrapperProps> = ({
           marginBottom: mb,
           backgroundColor: bgColor,
         },
+        style,
       ]}>
       {children}
     </View>

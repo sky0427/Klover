@@ -1,190 +1,129 @@
-import {DetailTourPost, TourPostDto} from '@/types/domain';
-import {ApiResponse, KloverPage} from '@/types/domain';
-import {GET, POST} from './commonApi';
-import {Area, ContentType, Country, TourPostSort} from '@/types';
-import {axiosInstance} from '@/utils/axios';
+import {
+  Area,
+  ContentType,
+  Country,
+  KloverPage,
+  TourPostDto,
+  TourPostSort,
+} from '@/types';
+import {AxiosRequestConfig} from 'axios';
+import {GET} from './commonApi';
 
-const API_PREFIX = '/api/v1/tour-post';
-
-export interface FilterParams {
-  page?: number;
-  size?: number;
+const BASE_URL = '/api/v1/tour-post';
+export interface SearchParams {
   language: Country;
-  area?: Area;
-  contentType?: ContentType;
-  hasExotic?: boolean;
-  hasHealing?: boolean;
-  hasActive?: boolean;
-  hasTranditional?: boolean;
-  sort?: TourPostSort;
   mapX: number;
   mapY: number;
-}
-
-export const getFilteredTourPosts = async (
-  params: FilterParams,
-): Promise<KloverPage<TourPostDto>> => {
-  const {
-    page = 0,
-    size = 20,
-    language,
-    area,
-    contentType,
-    hasExotic,
-    hasHealing,
-    hasActive,
-    hasTranditional,
-    sort,
-    mapX,
-    mapY,
-  } = params;
-
-  const queryParams = new URLSearchParams({
-    page: page.toString(),
-    size: size.toString(),
-    language: language,
-    ...(area && {area: area}),
-    ...(contentType && {contenttype: contentType}),
-    ...(hasExotic && {exotic: hasExotic.toString()}),
-    ...(hasHealing && {healing: hasHealing.toString()}),
-    ...(hasActive && {active: hasActive.toString()}),
-    ...(hasTranditional && {traditional: hasTranditional.toString()}),
-    ...(sort && {sort: sort}),
-    mapX: mapX.toString(),
-    mapY: mapY.toString(),
-  });
-
-  try {
-    const response = await GET<KloverPage<TourPostDto>>(
-      `${API_PREFIX}/search?${queryParams.get.toString()}`,
-    );
-
-    if (response.data.returnCode !== '0000') {
-      throw new Error(
-        response.data.returnMessage || 'Failed to filter tour posts',
-      );
-    }
-    return (
-      response.data.data ?? {
-        contents: [],
-        pageNumber: 0,
-        pageSize: 0,
-        totalPages: 0,
-        totalCount: 0,
-      }
-    );
-  } catch (error) {
-    console.error('Error filtering data', error);
-    throw error;
-  }
-};
-
-export interface SearchParams {
   page?: number;
   size?: number;
   keyword?: string;
-  language: Country;
+  sort?: TourPostSort;
+  area?: Area;
+  contentType?: ContentType;
   searchByTitle?: boolean;
   searchByOverview?: boolean;
-  sort?: TourPostSort;
-  mapX: number;
-  mapY: number;
+  hasExotic?: boolean;
+  hasHealing?: boolean;
+  hasActive?: boolean;
+  hasTraditional?: boolean;
 }
 
 export const searchTourPosts = async (
   params: SearchParams,
-): Promise<ApiResponse<KloverPage<TourPostDto>>> => {
+): Promise<KloverPage<TourPostDto> | undefined> => {
   const {
-    page = 0,
-    size = 20,
-    keyword,
     language,
-    searchByTitle = true,
-    searchByOverview = true,
-    sort,
     mapX,
     mapY,
+    page = 0,
+    size = 20,
+    keyword = '',
+    sort = TourPostSort.Distance,
+    area,
+    contentType,
+    searchByTitle = false,
+    searchByOverview = false,
+    hasExotic = false,
+    hasHealing = false,
+    hasActive = false,
+    hasTraditional = false,
   } = params;
 
-  const queryParams = new URLSearchParams({
-    page: page.toString(),
-    size: size.toString(),
-    // keyword,
-    language,
-    title: searchByTitle.toString(),
-    overview: searchByOverview.toString(),
-    mapX: mapX.toString(),
-    mapY: mapY.toString(),
-    ...(sort && {sort: sort}),
-    ...(keyword && {keyword: keyword}),
-  });
+  const config: AxiosRequestConfig = {
+    params: {
+      language,
+      mapX,
+      mapY,
+      page,
+      size,
+      keyword,
+      sort,
+      area,
+      contenttype: contentType,
+      title: searchByTitle,
+      overview: searchByOverview,
+      exotic: hasExotic,
+      healing: hasHealing,
+      active: hasActive,
+      traditional: hasTraditional,
+    },
+  };
 
   try {
-    const response = await GET<KloverPage<TourPostDto>>(
-      `/tour-post/search?${queryParams.toString()}`,
-    );
-
-    if (response.returnCode !== '0000') {
-      throw new Error(response.returnMessage || 'Failed to search Tour Posts');
-    }
-
-    return response;
+    const response = await GET<TourPostDto>('/api/v1/tour-post/search', config);
+    return response.data.kloverPage;
   } catch (error) {
-    console.error('Error searching data', error);
+    console.error('API 요청 오류: ', error);
     throw error;
   }
 };
 
-export interface NearByParams {
-  page?: number;
-  size?: number;
-  language: Country;
-  mapX: number; // 필수
-  mapY: number; // 필수
-  sort?: TourPostSort;
-  area?: Area; // 선택적 파라미터
-  contentType?: ContentType;
-}
-
-export const getNearByTourPosts = async (
-  params: NearByParams,
-): Promise<KloverPage<TourPostDto>> => {
+export const searchTourPostsInfinite = async (
+  params: SearchParams,
+): Promise<KloverPage<TourPostDto> | undefined> => {
   const {
-    page = 0,
-    size = 20,
     language,
     mapX,
     mapY,
-    sort,
+    page = 0,
+    size = 20,
+    keyword = '',
+    sort = TourPostSort.Distance,
     area,
     contentType,
+    searchByTitle = false,
+    searchByOverview = false,
+    hasExotic = false,
+    hasHealing = false,
+    hasActive = false,
+    hasTraditional = false,
   } = params;
 
-  const queryParams = new URLSearchParams({
-    page: page.toString(),
-    size: size.toString(),
-    language,
-    mapX: mapX.toString(),
-    mapY: mapY.toString(),
-    ...(sort && {sort: sort}),
-    ...(area && {area: area}),
-    ...(contentType && {contenttype: contentType}),
-  });
+  const config: AxiosRequestConfig = {
+    params: {
+      language,
+      mapX,
+      mapY,
+      page,
+      size,
+      keyword,
+      sort,
+      area,
+      contenttype: contentType,
+      title: searchByTitle,
+      overview: searchByOverview,
+      exotic: hasExotic,
+      healing: hasHealing,
+      active: hasActive,
+      traditional: hasTraditional,
+    },
+  };
 
   try {
-    const response = await GET<TourPostDto>(
-      `${API_PREFIX}/search?${queryParams.get.toString}`,
-    );
-
-    if (response.data.returnCode !== '0000') {
-      throw new Error(
-        response.data.returnMessage || 'Failed to get nearby Tour Data',
-      );
-    }
-
-    return response.data.kloverPage!;
+    const response = await GET<TourPostDto>('/api/v1/tour-post/search', config);
+    return response.data.kloverPage;
   } catch (error) {
-    console.log('Error getting near by tour posts', error);
+    console.error('API 요청 오류: ', error);
     throw error;
   }
 };

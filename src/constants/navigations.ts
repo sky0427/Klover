@@ -16,6 +16,7 @@ const authNavigations = {
 
 const homeNavigations = {
   MAIN_HOME: 'MainHome',
+  SEARCH: 'Search',
 } as const;
 
 const mapNavigations = {
