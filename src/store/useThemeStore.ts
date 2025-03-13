@@ -8,7 +8,7 @@ interface ThemeState {
 }
 
 const useThemeStore = create<ThemeState>(set => ({
-  theme: 'dark',
+  theme: 'light',
   isSystem: false,
   setTheme: (theme: ThemeMode) => {
     set({theme});

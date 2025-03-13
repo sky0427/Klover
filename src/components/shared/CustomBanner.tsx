@@ -1,18 +1,24 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import {colors} from '@/constants/colors';
+import {sizes, spacing} from '@/constants/theme';
 import useThemeStore from '@/store/useThemeStore';
 import {ThemeMode} from '@/types/type';
-import {colors} from '@/constants/colors';
-import Wrapper from './Wrapper';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import CustomText from './CustomText';
 
-const CustomBanner = () => {
+interface CustomBannerProps {
+  content: string;
+}
+
+const CustomBanner = ({content}: CustomBannerProps) => {
   const {theme} = useThemeStore();
   const styles = styling(theme);
+
   return (
     <View style={styles.container}>
-      <Wrapper>
-        <Text>CustomBanner</Text>
-      </Wrapper>
+      <CustomText fontWeight="regular" style={styles.text} numberOfLines={1}>
+        {content}
+      </CustomText>
     </View>
   );
 };
@@ -20,8 +26,19 @@ const CustomBanner = () => {
 const styling = (theme: ThemeMode) =>
   StyleSheet.create({
     container: {
-      flex: 1,
+      width: sizes.width,
       backgroundColor: colors[theme].PRIMARY,
+      marginTop: spacing.l,
+      marginBottom: spacing.xl,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 8,
+      paddingHorizontal: spacing.l,
+      borderRadius: 3,
+    },
+    text: {
+      fontSize: sizes.sm,
+      color: colors[theme].UNCHANGE_WHITE,
     },
   });
 

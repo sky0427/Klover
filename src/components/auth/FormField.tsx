@@ -1,20 +1,10 @@
 import {colors} from '@/constants/colors';
 import useThemeStore from '@/store/useThemeStore';
 import {ThemeMode} from '@/types/type';
-import React, {
-  FocusEvent,
-  ForwardedRef,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, {ForwardedRef, forwardRef, useMemo, useState} from 'react';
 import {
-  NativeSyntheticEvent,
   StyleSheet,
   TextInput,
-  TextInputFocusEventData,
   TextInputProps,
   TouchableOpacity,
   View,

@@ -3,7 +3,7 @@ import MainDrawerNavigator from '../drawer/MainDrawerNavigator';
 import AuthStackNavigator from '../stack/AuthStackNavigator';
 
 function RootNavigator() {
-  const isLogin = false;
+  const isLogin = true;
 
   return (
     <RetryErrorBoundary>

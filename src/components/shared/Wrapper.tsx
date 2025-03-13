@@ -1,10 +1,12 @@
+import {sizes} from '@/constants/theme';
 import React, {ReactNode} from 'react';
-import {Dimensions, StyleSheet, View, ViewStyle} from 'react-native';
+import {StyleSheet, View, ViewStyle} from 'react-native';
 
 interface WrapperProps {
   style?: ViewStyle;
   children: ReactNode;
   mv?: number;
+  mt?: number;
   mb?: number;
   ph?: number;
   pv?: number;
@@ -16,9 +18,10 @@ const Wrapper: React.FC<WrapperProps> = ({
   children,
   bgColor,
   mv,
+  mt,
   mb,
   pv,
-  ph = Dimensions.get('screen').width * 0.05,
+  ph = sizes.width * 0.05,
 }) => {
   return (
     <View
@@ -28,6 +31,7 @@ const Wrapper: React.FC<WrapperProps> = ({
           paddingVertical: pv,
           paddingHorizontal: ph,
           marginVertical: mv,
+          marginTop: mt,
           marginBottom: mb,
           backgroundColor: bgColor,
         },

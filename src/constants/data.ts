@@ -1,68 +1,68 @@
-const Cities = [
+export const Cities = [
   {
     id: 1,
-    title: 'Seoul',
-    location: '',
-    image: require('@/assets/images/seoul.png'),
+    title: 'SEOUL',
+    location: 'South Korea',
+    image: require('@/assets/images/Seoul.png'),
   },
   {
     id: 2,
-    title: 'Busan',
-    location: '',
-    image: require('@/assets/images/busan.png'),
+    title: 'BUSAN',
+    location: 'South Korea',
+    image: require('@/assets/images/Busan.png'),
   },
   {
     id: 3,
-    title: 'Jeju',
-    location: '',
-    image: require('@/assets/images/jeju.png'),
+    title: 'JEJU',
+    location: 'South Korea',
+    image: require('@/assets/images/Jeju.png'),
   },
   {
     id: 4,
-    title: 'Incheon',
-    location: '',
-    image: require('@/assets/images/incheon.png'),
+    title: 'INCHEON',
+    location: 'South Korea',
+    image: require('@/assets/images/Incheon.png'),
   },
 ];
 
-const Categories = [
+export const Categories = [
   {
-    id: 1,
+    id: 5,
     title: 'Attractions',
     image: require('@/assets/images/attractions.png'),
   },
   {
-    id: 2,
+    id: 6,
     title: 'Cultural Facilities',
     image: require('@/assets/images/cultural-facilities.png'),
   },
   {
-    id: 3,
+    id: 7,
     title: 'Dinings',
     image: require('@/assets/images/dinings.png'),
   },
   {
-    id: 4,
+    id: 8,
     title: 'Accommodations',
     image: require('@/assets/images/accommodations.png'),
   },
   {
-    id: 5,
+    id: 9,
     title: 'Activities',
     image: require('@/assets/images/activities.png'),
   },
   {
-    id: 6,
+    id: 10,
     title: 'Shoppings',
     image: require('@/assets/images/shoppings.png'),
   },
   {
-    id: 7,
+    id: 11,
     title: 'Events',
     image: require('@/assets/images/events.png'),
   },
   {
-    id: 8,
+    id: 12,
     title: 'Transportations',
     image: require('@/assets/images/transportations.png'),
   },

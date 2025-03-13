@@ -16,7 +16,8 @@ import useThemeStore from '@/store/useThemeStore';
 import {LoginRequest} from '@/types/auth';
 import {ThemeMode} from '@/types/type';
 import {useNavigation} from '@react-navigation/native';
-import {useEffect, useRef, useState} from 'react';
+import {Formik} from 'formik';
+import {useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
   StyleSheet,
@@ -26,9 +27,8 @@ import {
   View,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Formik} from 'formik';
-import * as yup from 'yup';
 import Toast from 'react-native-toast-message';
+import * as yup from 'yup';
 
 const SigninScreen = () => {
   const {theme} = useThemeStore();
@@ -104,7 +104,7 @@ const SigninScreen = () => {
             touched,
             isValid,
           }) => (
-            <>
+            <View>
               <Wrapper mb={36}>
                 <FormField
                   ref={emailRef}
@@ -141,7 +141,7 @@ const SigninScreen = () => {
                   disabled={!isValid || isSubmitting}
                 />
               </Wrapper>
-            </>
+            </View>
           )}
         </Formik>
 
