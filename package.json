@@ -21,6 +21,7 @@
     "@tanstack/react-query": "^5.66.9",
     "@xmartlabs/react-native-line": "^4.1.0",
     "axios": "^1.8.1",
+    "formik": "^2.4.6",
     "i18next": "^24.2.2",
     "i18next-http-backend": "^3.0.2",
     "i18next-resources-to-backend": "^1.2.1",
@@ -42,6 +43,7 @@
     "react-native-svg": "^15.11.2",
     "react-native-toast-message": "^2.2.1",
     "react-native-webview": "^13.13.2",
+    "yup": "^1.6.1",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

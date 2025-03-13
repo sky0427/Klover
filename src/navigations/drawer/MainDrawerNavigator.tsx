@@ -118,10 +118,10 @@ function MainDrawerNavigator() {
 const styling = (theme: ThemeMode) =>
   StyleSheet.create({
     drawer: {
-      width: '75%',
-      backgroundColor: 'rgba(88, 67, 190, 0.9)',
-      borderTopRightRadius: 16,
-      borderTopLeftRadius: 16,
+      width: '80%',
+      backgroundColor: 'rgba(88, 67, 190, 1)',
+      // borderTopRightRadius: 50,
+      // borderBottomRightRadius: 50,
     },
   });
 

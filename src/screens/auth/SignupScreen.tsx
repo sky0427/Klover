@@ -10,10 +10,12 @@ import useThemeStore from '@/store/useThemeStore';
 import {SignupRequest} from '@/types/auth';
 import {ThemeMode} from '@/types/type';
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {Formik} from 'formik';
+import * as yup from 'yup';
 
 const SignupScreen = () => {
   const {theme} = useThemeStore();
@@ -21,60 +23,138 @@ const SignupScreen = () => {
   const navigation = useNavigation();
   const {language} = useLanguageStore();
   const {t} = useTranslation();
-  const [form, setForm] = useState<SignupRequest>({
+  const [isSubmitting, setSubmitting] = useState(false);
+
+  const emailRef = useRef<TextInput>(null);
+  const nicknameRef = useRef<TextInput>(null);
+  const passwordRef = useRef<TextInput>(null);
+  const checkPasswordRef = useRef<TextInput>(null);
+
+  const loginValidationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email(t('invalid_email', {language}))
+      .required(t('required_email', {language})),
+    nickname: yup
+      .string()
+      .min(3, t('invalid_nickname_length', {language}))
+      .max(8, t('invalid_nickname_length', {language}))
+      .required(t('required_nickname', {language})),
+    password: yup
+      .string()
+      .min(8, t('invalid_password_length', {language}))
+      .max(16, t('invalid_password_length', {language}))
+      .matches(
+        /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()])[a-zA-Z0-9!@#$%^&*()]{8,16}$/,
+        t('invalid_password', {language}),
+      )
+      .required(t('required_password', {language})),
+    checkPassword: yup
+      .string()
+      .equals(
+        [yup.ref('password'), null],
+        t('invalid_checkpassword', {language}),
+      )
+      .required(t('required_checkpassword', {language})),
+  });
+
+  const initialValues: SignupRequest = {
     email: '',
     nickname: '',
     password: '',
     checkPassword: '',
-  });
+  };
+
+  const handleSignup = () => {};
 
   return (
     <ScreenWrapper style={styles.container}>
-      <KeyboardAwareScrollView contentContainerStyle={styles.contentContainer}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.contentContainer}
+        keyboardShouldPersistTaps="handled">
         <Wrapper mb={36}>
           <CustomText fontWeight="bold" style={styles.title}>
-            {t('signupTitle', {language})}
+            {t('signup_title', {language})}
           </CustomText>
         </Wrapper>
-        <Wrapper mb={36}>
-          <FormField
-            title="Email"
-            value={form.email}
-            handleChangeText={e => {
-              setForm({...form, email: e});
-            }}
-            autoFocus={true}
-          />
-          <FormField
-            title="Nickname"
-            value={form.nickname}
-            handleChangeText={e => {
-              setForm({...form, nickname: e});
-            }}
-          />
-          <FormField
-            title="Password"
-            value={form.password}
-            handleChangeText={e => {
-              setForm({...form, password: e});
-            }}
-          />
-          <FormField
-            title="Confirm Password"
-            value={form.checkPassword}
-            handleChangeText={e => {
-              setForm({...form, checkPassword: e});
-            }}
-          />
-        </Wrapper>
 
-        <Wrapper mb={36}>
-          <CustomButton label="Sign Up" />
-        </Wrapper>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={loginValidationSchema}
+          onSubmit={handleSignup}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+            isValid,
+          }) => (
+            <>
+              <Wrapper mb={36}>
+                <FormField
+                  ref={emailRef}
+                  type="email"
+                  autoFocus
+                  label={t('email', {language})}
+                  value={values.email}
+                  handleChangeText={handleChange('email')}
+                  handleBlur={() => handleBlur('email')}
+                  error={touched.email && errors.email}
+                  returnKeyType="next"
+                  onSubmitEditing={() => nicknameRef.current?.focus()}
+                />
+
+                <FormField
+                  ref={nicknameRef}
+                  type="default"
+                  label={t('nickname', {language})}
+                  value={values.nickname}
+                  handleChangeText={handleChange('nickname')}
+                  handleBlur={() => handleBlur('nickname')}
+                  error={touched.nickname && errors.nickname}
+                  returnKeyType="next"
+                  onSubmitEditing={() => passwordRef.current?.focus()}
+                />
+
+                <FormField
+                  ref={passwordRef}
+                  type="password"
+                  label={t('password', {language})}
+                  value={values.password}
+                  placeholder=""
+                  handleChangeText={handleChange('password')}
+                  handleBlur={() => handleBlur('password')}
+                  error={touched.password && errors.password}
+                  returnKeyType="next"
+                  onSubmitEditing={() => checkPasswordRef.current?.focus()}
+                />
+
+                <FormField
+                  ref={checkPasswordRef}
+                  type="password"
+                  label={t('check_password', {language})}
+                  value={values.checkPassword}
+                  placeholder=""
+                  handleChangeText={handleChange('checkPassword')}
+                  handleBlur={() => handleBlur('checkPassword')}
+                  error={touched.checkPassword && errors.checkPassword}
+                  returnKeyType="done"
+                  onSubmitEditing={handleSubmit}
+                />
+              </Wrapper>
+
+              <Wrapper mb={36}>
+                <CustomButton label={t('signup', {language})} />
+              </Wrapper>
+            </>
+          )}
+        </Formik>
 
         <Wrapper style={styles.loginContainer}>
           <CustomText fontWeight="medium" style={styles.loginText}>
-            {t('recommendLogin', {language})}
+            {t('login_recommend', {language})}
           </CustomText>
           <TouchableOpacity>
             <CustomText
@@ -83,7 +163,7 @@ const SignupScreen = () => {
               onPress={() =>
                 navigation.navigate(authNavigations.SIGNIN as never)
               }>
-              {t('loginHighlight', {language})}
+              {t('login', {language})}
             </CustomText>
           </TouchableOpacity>
         </Wrapper>

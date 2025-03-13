@@ -21,7 +21,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
       {/* Drawer Items */}
       <DrawerContentScrollView
         {...props}
-        scrollEnabled={true}
+        scrollEnabled={false}
         contentContainerStyle={styles.contentContainer}>
         {/* User Profile Section */}
 
@@ -105,7 +105,7 @@ const styling = (theme: ThemeMode) =>
     },
     userName: {
       fontSize: 16,
-      color: colors[theme].GRAY_100,
+      color: colors[theme].UNCHANGE_WHITE,
       marginBottom: 3,
     },
     userLocation: {

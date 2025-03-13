@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useTourSearchStore} from '@/store/zustand/useTourSearchStore';
-import {useDebounce} from '@/hooks/useDebounce';
+
 import {useTourPostsInfiniteQuery} from '@/hooks/react-query/useTourPostQueries';
 import {Country, TourPostSort} from '@/types';
 import {} from 'react-native-maps';
@@ -24,10 +24,11 @@ import {useNavigation} from '@react-navigation/native';
 import CustomText from '@/components/shared/CustomText';
 import {colors} from '@/constants/colors';
 import CustomCard from '@/components/shared/CustomCard';
+import useDebounce from '@/hooks/useDebounce';
 
 const SearchTourPostsScreen: React.FC = () => {
   const {theme} = useThemeStore();
-  const styles = useMemo(() => styling(theme), [theme]);
+  const styles = styling(theme);
   const navigation = useNavigation();
   const {setKeyword} = useTourSearchStore();
   const {language} = useLanguageStore();

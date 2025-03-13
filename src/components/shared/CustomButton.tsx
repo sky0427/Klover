@@ -6,13 +6,14 @@ import {
   ActivityIndicator,
   Dimensions,
   Pressable,
+  PressableProps,
   StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
 import CustomText from './CustomText';
 
-interface CustomButtonProps {
+interface CustomButtonProps extends PressableProps {
   label: string;
   variant?: 'filled' | 'outlined';
   inValid?: boolean;

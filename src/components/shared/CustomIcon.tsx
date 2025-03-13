@@ -1,7 +1,6 @@
 import {SvgProps} from 'react-native-svg';
 import * as Icons from '@/constants/icons';
 import {Pressable, StyleProp, View, ViewStyle} from 'react-native';
-
 export interface CustomIconProps extends SvgProps {
   name: keyof typeof Icons;
   size?: number;

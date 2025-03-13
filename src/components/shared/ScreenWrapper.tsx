@@ -24,7 +24,7 @@ const ScreenWrapper: React.FC<ScreenWrapperProps> = ({style, children}) => {
     <View style={[styles.container, style, {paddingTop, paddingBottom}]}>
       <StatusBar
         translucent
-        barStyle={'dark-content'}
+        barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
         backgroundColor={'transparent'}
       />
       {children}

@@ -67,6 +67,7 @@ const HomeScreen = () => {
     <ScreenWrapper>
       <CustomHeader
         leftIconName="MenuFillSvg"
+        iconColor={colors[theme].BLACK}
         onLeftIconPress={() => navigation.openDrawer()}
       />
 
@@ -89,18 +90,16 @@ const HomeScreen = () => {
         </Pressable>
       </Wrapper>
 
-      <View>
-        <FlatList
-          data={data?.contents}
-          keyExtractor={item => item.contentId.toString()}
-          renderItem={({item}) => (
-            <View>
-              <Text>{item.title}</Text>
-              <Text>{item.addr1}</Text>
-            </View>
-          )}
-        />
-      </View>
+      <FlatList
+        data={data?.contents}
+        keyExtractor={item => item.contentId.toString()}
+        renderItem={({item}) => (
+          <View>
+            <Text>{item.title}</Text>
+            <Text>{item.addr1}</Text>
+          </View>
+        )}
+      />
     </ScreenWrapper>
   );
 };
@@ -116,6 +115,7 @@ const styling = (theme: ThemeMode) =>
     },
     title: {
       fontSize: 26,
+      color: colors[theme].BLACK,
       paddingLeft: 3,
     },
     searchContainer: {
@@ -127,7 +127,7 @@ const styling = (theme: ThemeMode) =>
       paddingHorizontal: 12,
       alignItems: 'center',
       borderRadius: 16,
-      backgroundColor: colors[theme].GRAY_100,
+      backgroundColor: colors[theme].INPUT,
     },
     searchText: {
       flex: 1,

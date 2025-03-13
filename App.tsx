@@ -2,9 +2,10 @@ import {colors} from '@/constants/colors';
 import RootNavigator from '@/navigations/root/RootNavigator';
 import useThemeStore from '@/store/useThemeStore';
 import queryClient from '@/utils/queryClient';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {NavigationContainer} from '@react-navigation/native';
 import {QueryClientProvider} from '@tanstack/react-query';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -13,6 +14,7 @@ import Toast, {
   BaseToastProps,
   ErrorToast,
 } from 'react-native-toast-message';
+import LineLogin from '@xmartlabs/react-native-line';
 
 const toastConfig = {
   success: (props: BaseToastProps) => (
@@ -43,11 +45,9 @@ const toastConfig = {
 
 function App(): React.JSX.Element {
   const {theme} = useThemeStore();
+
   return (
     <QueryClientProvider client={queryClient}>
-      <StatusBar
-        barStyle={theme === 'light' ? 'dark-content' : 'light-content'}
-      />
       <GestureHandlerRootView>
         <SafeAreaProvider>
           <NavigationContainer>

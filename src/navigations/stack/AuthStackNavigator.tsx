@@ -1,4 +1,5 @@
 import {authNavigations} from '@/constants/navigations';
+import AuthHomeScreen from '@/screens/auth/AuthHomeScreen';
 import SigninScreen from '@/screens/auth/SigninScreen';
 import SignupScreen from '@/screens/auth/SignupScreen';
 import WelcomScreen from '@/screens/auth/WelcomScreen';
@@ -17,10 +18,10 @@ function AuthStackNavigator() {
   const {theme} = useThemeStore();
 
   return (
-    <Stack.Navigator initialRouteName={authNavigations.SIGNIN}>
+    <Stack.Navigator initialRouteName={authNavigations.AUTH_HOME}>
       <Stack.Screen
         name={authNavigations.AUTH_HOME}
-        component={WelcomScreen}
+        component={AuthHomeScreen}
         options={{
           headerShown: false,
         }}
