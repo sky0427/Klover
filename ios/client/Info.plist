@@ -83,19 +83,36 @@
 		<string>NotoSansSC-SemiBold.ttf</string>
 	</array>
 	<key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-        <key>CFBundleTypeRole</key>
-        <string>Editor</string>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>line3rdp.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-        </array>
-      </dict>
-    </array>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>lineauth2</string>
-  </array>
+		<array>
+				<dict>
+						<key>CFBundleTypeRole</key>
+						<string>Editor</string>
+						<key>CFBundleURLSchemes</key>
+						<array>
+								<string>com.googleusercontent.apps.355453727665-kbgkh014u11cg9p84pgkkpdteikc1qag</string>
+						</array>
+				</dict>
+				<dict>
+						<key>CFBundleTypeRole</key>
+						<string>Editor</string>
+						<key>CFBundleURLSchemes</key>
+						<array>
+								<string>line3rdp.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+						</array>
+						<key>CFBundleURLName</key>
+						<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+				</dict>
+		</array>
+
+	<key>GIDClientID</key>
+		<string>355453727665-kbgkh014u11cg9p84pgkkpdteikc1qag.apps.googleusercontent.com</string>
+
+		<key>LIAppId</key>
+		<string>2006951933</string>
+
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+				<string>lineauth2</string>
+		</array>
 </dict>
 </plist>

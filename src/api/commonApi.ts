@@ -45,4 +45,5 @@ const PUT = async <T>(
   const response = await axiosInstance.put(url, data, config);
   return response;
 };
+
 export {DELETE, GET, PATCH, POST, PUT};

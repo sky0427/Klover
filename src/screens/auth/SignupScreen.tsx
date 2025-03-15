@@ -16,6 +16,7 @@ import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import {useSignupMutation} from '@/hooks/react-query/useAuthMutations';
 
 const SignupScreen = () => {
   const {theme} = useThemeStore();
@@ -23,6 +24,7 @@ const SignupScreen = () => {
   const navigation = useNavigation();
   const {language} = useLanguageStore();
   const {t} = useTranslation();
+  const {mutate: signupMutate} = useSignupMutation();
   const [isSubmitting, setSubmitting] = useState(false);
 
   const emailRef = useRef<TextInput>(null);
@@ -65,7 +67,14 @@ const SignupScreen = () => {
     checkPassword: '',
   };
 
-  const handleSignup = () => {};
+  const handleSignup = (values: SignupRequest) => {
+    setSubmitting(true);
+    signupMutate(values, {
+      onSettled: () => {
+        setSubmitting(false);
+      },
+    });
+  };
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -146,7 +155,12 @@ const SignupScreen = () => {
               </Wrapper>
 
               <Wrapper mb={36}>
-                <CustomButton label={t('signup', {language})} />
+                <CustomButton
+                  label={t('signup', {language})}
+                  onPress={handleSubmit}
+                  isLoading={isSubmitting}
+                  disabled={!isValid || isSubmitting}
+                />
               </Wrapper>
             </>
           )}

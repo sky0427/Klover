@@ -10,7 +10,7 @@ import {
 } from '@/constants/icons';
 import {mainNavigation} from '@/constants/navigations';
 import CommunityScreen from '@/screens/community';
-import ExploreScreen from '@/screens/explore';
+import ExploreScreen from '@/screens/explore/ExploreScreen';
 import HomeScreen from '@/screens/home/HomeScreen';
 import ProfileScreen from '@/screens/profile';
 import useThemeStore from '@/store/useThemeStore';

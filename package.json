@@ -29,6 +29,7 @@
     "react-error-boundary": "^5.0.0",
     "react-i18next": "^15.4.1",
     "react-native": "0.78.0",
+    "react-native-animatable": "^1.4.0",
     "react-native-config": "^1.5.5",
     "react-native-encrypted-storage": "^4.0.3",
     "react-native-gesture-handler": "^2.24.0",

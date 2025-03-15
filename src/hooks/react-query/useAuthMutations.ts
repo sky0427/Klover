@@ -26,8 +26,9 @@ import LineLogin from '@xmartlabs/react-native-line';
 import {useTranslation} from 'react-i18next';
 import {Alert, ToastAndroid} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import Config from 'react-native-config';
 
-const LINE_CLIENT_ID = '2006951933';
+const lineClientId = Config.LINE_CLIENT_ID;
 
 const useLoginMutation = () => {
   const {user, setUser} = useAuthStore();
@@ -311,7 +312,7 @@ const useDeleteAccountMutation = () => {
         const revokeUrl = 'https://api.line.me/oauth2/v2.1/revoke';
         const revokeParams = new URLSearchParams();
 
-        revokeParams.append('client_id', LINE_CLIENT_ID ?? 'error');
+        revokeParams.append('client_id', lineClientId ?? 'error');
         revokeParams.append('access_token', providerAccessToken ?? 'error');
 
         await fetch(revokeUrl, {

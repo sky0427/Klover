@@ -131,7 +131,7 @@ const HomeScreen = () => {
           <HotPlaceCarousel data={data ? data?.contents : []} />
         </Wrapper>
 
-        <Wrapper ph={0}>
+        <Wrapper ph={0} mb={56}>
           <SectionHeader title="Useful Travel Info" onPress={() => {}} />
           <View
             style={{
@@ -142,12 +142,12 @@ const HomeScreen = () => {
               flexWrap: 'wrap',
             }}>
             {Categories.map(item => (
-              <TouchableOpacity>
+              <TouchableOpacity key={item.id}>
                 <Image
                   source={item.image}
                   style={{
-                    width: (sizes.width - spacing.l * 3) / 2,
-                    height: (sizes.width - spacing.l * 3) / 2,
+                    width: (sizes.width * 0.9 - spacing.m) / 2,
+                    height: (sizes.width * 0.9 - spacing.m) / 2,
                     borderRadius: sizes.radius,
                     resizeMode: 'cover',
                   }}
@@ -155,8 +155,8 @@ const HomeScreen = () => {
                 <View
                   style={{
                     position: 'absolute',
-                    width: (sizes.width - spacing.l * 3) / 2,
-                    height: (sizes.width - spacing.l * 3) / 2,
+                    width: (sizes.width * 0.9 - spacing.m) / 2,
+                    height: (sizes.width * 0.9 - spacing.m) / 2,
                     backgroundColor: 'rgba(0, 0, 0, 0.1)',
                     borderRadius: sizes.radius,
                   }}

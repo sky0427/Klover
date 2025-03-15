@@ -1,6 +1,6 @@
 import {colors} from '@/constants/colors';
 import {mapNavigations} from '@/constants/navigations';
-import ExploreScreen from '@/screens/explore';
+import ExploreScreen from '@/screens/explore/ExploreScreen';
 import useThemeStore from '@/store/useThemeStore';
 import {createStackNavigator} from '@react-navigation/stack';
 import {LatLng} from 'react-native-maps';

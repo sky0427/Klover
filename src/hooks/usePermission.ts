@@ -45,3 +45,5 @@ function usePermission(type: PermissionType) {
     };
   });
 }
+
+export default usePermission;

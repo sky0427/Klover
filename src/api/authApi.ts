@@ -62,7 +62,7 @@ export const lineLogin = async (): Promise<LoginResponse> => {
       LoginPermission.Profile,
     ],
     botPrompt: BotPrompt.Normal,
-    //onlyWebLogin: true,
+    onlyWebLogin: true,
   });
 
   if (!result) {

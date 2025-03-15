@@ -1,10 +1,16 @@
 import {ImageOrVideo} from 'react-native-image-crop-picker';
+import {LatLng} from 'react-native-maps';
 
 export interface ApiResponse<T> {
   returnCode: string;
   returnMessage: string;
-  data?: T; // 일반적인 데이터 (Pageable, KloverPage를 사용하지 않는 경우)
-  kloverPage?: KloverPage<T>; // KloverPage 데이터 (Pageable을 사용하는 경우)
+  data?: T;
+  kloverPage?: KloverPage<T>;
+}
+
+export interface PageDto {
+  page: number;
+  size: number;
 }
 
 export interface KloverPage<T> {
@@ -14,7 +20,6 @@ export interface KloverPage<T> {
   totalPages: number;
   totalCount: number;
 }
-
 export interface TourPostDto {
   contentId: number;
   commonPlaceId: number;
@@ -27,7 +32,7 @@ export interface TourPostDto {
   mapY: number;
 }
 
-export interface DetailTourPost {
+export interface DetailTourPostDto {
   contentId: number;
   commonPlaceId: number;
   avgRating: number;
@@ -40,12 +45,8 @@ export interface DetailTourPost {
   overview?: string;
 }
 
-export interface TourPostPage {
-  page: number;
-  size: number;
-}
-
 export interface CommPostDto {
+  id: number;
   memberId: number;
   nickname: string;
   mapX: number;
@@ -53,23 +54,72 @@ export interface CommPostDto {
   imageUrls: string[];
   createdAt: Date;
 }
-
-export interface DetailCommPostDto extends CommPostDto {
+export interface CommPostDetailDto {
+  memberId: number;
+  id: number;
+  nickname: string;
   likeCount: number;
+  commentCount: number;
+  mapX: number;
+  mapY: number;
   content: string;
-}
-
-export interface CommPostPage {
-  page: number;
-  size: number;
-}
-
-export interface CommPostFrom {
-  title: string;
-  content: string;
+  imageUrls: string[];
+  createDate: Date;
+  profileImageUrl: string | null;
+  isLiked: boolean;
+  isSaved: boolean;
 }
 
 export interface CombinedPostResponse {
   commPosts: KloverPage<CommPostDto>;
   tourPosts: KloverPage<TourPostDto>;
+}
+
+export interface CommentDto {
+  id: number;
+  memberId: number;
+  nickname: string;
+  likeCount: number;
+  content: string;
+  superCommentId: number;
+  createDate: Date;
+  profileImageUrl: string | null;
+  isLiked: boolean;
+}
+
+export interface CommentLikeRequest {
+  commentId: number;
+}
+
+export interface CommPostRequest {
+  commPostId: number;
+}
+
+export interface CommPostWriteRequest {
+  img: ImageOrVideo | undefined;
+  content: string;
+  mapX: number;
+  mapY: number;
+}
+
+export interface CommPostModifyRequest {
+  img: ImageOrVideo | undefined;
+  content: string;
+  mapX: number;
+  mapY: number;
+  commPostId: number;
+}
+
+export interface CommentWriteRequest {
+  content: string;
+  commPostId: number;
+}
+
+export interface CommentModifyRequest {
+  commentId: number;
+  content: string;
+}
+
+export interface CommentDeleteRequest {
+  commentId: number;
 }

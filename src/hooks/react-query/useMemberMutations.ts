@@ -2,9 +2,9 @@ import {updateMember} from '@/api/memberApi';
 import {Country} from '@/types';
 import {MemberUpdateParam} from '@/types/auth';
 import {useMutation} from '@tanstack/react-query';
-import {ToastAndroid} from 'react-native';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
 import {useGetMemberStateMutation} from './useAuthMutations';
+import Toast from 'react-native-toast-message';
 
 const useMemberUpdateMutation = () => {
   const {mutate} = useGetMemberStateMutation();
@@ -17,14 +17,17 @@ const useMemberUpdateMutation = () => {
       return updateMember(updateParam);
     },
     onSuccess: () => {
-      ToastAndroid.show('언어 변경에 성공함', ToastAndroid.SHORT);
+      Toast.show({
+        type: 'success',
+        text1: '언어 변경에 성공하였습니다.',
+      });
       mutate();
     },
     onError: error => {
-      ToastAndroid.show(
-        `${error.message} 때문에 언어 변경에 실패함`,
-        ToastAndroid.SHORT,
-      );
+      Toast.show({
+        type: 'error',
+        text1: `${error.message} 때문에 언어 변경에 실패하였습니다.`,
+      });
     },
   });
 

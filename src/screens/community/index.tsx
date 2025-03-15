@@ -1,11 +1,12 @@
 import {View, Text} from 'react-native';
 import React from 'react';
+import ScreenWrapper from '@/components/shared/ScreenWrapper';
 
 const CommunityScreen = () => {
   return (
-    <View>
+    <ScreenWrapper>
       <Text>CommunityScreen</Text>
-    </View>
+    </ScreenWrapper>
   );
 };
 

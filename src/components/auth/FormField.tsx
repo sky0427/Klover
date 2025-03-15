@@ -102,6 +102,7 @@ const FormField = forwardRef(
 const styling = (theme: ThemeMode) =>
   StyleSheet.create({
     container: {
+      width: '100%',
       marginBottom: 16,
     },
     title: {

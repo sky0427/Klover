@@ -15,6 +15,7 @@ import Toast, {
   ErrorToast,
 } from 'react-native-toast-message';
 import LineLogin from '@xmartlabs/react-native-line';
+import Config from 'react-native-config';
 
 const toastConfig = {
   success: (props: BaseToastProps) => (
@@ -43,8 +44,21 @@ const toastConfig = {
   ),
 };
 
+const googleWebClientId = Config.GOOGLE_WEB_CLIENT_ID;
+const googleIosClientID = Config.GOOGLE_IOS_CLIENT_ID;
+const lineClientId = Config.LINE_CLIENT_ID;
+
 function App(): React.JSX.Element {
   const {theme} = useThemeStore();
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: googleWebClientId,
+      iosClientId: googleIosClientID,
+    });
+    LineLogin.setup({channelId: lineClientId ?? 'error'});
+    // initializeFCM();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
