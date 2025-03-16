@@ -1,6 +1,6 @@
 import {colors} from '@/constants/colors';
 import {settingNavigations} from '@/constants/navigations';
-import SettingScreen from '@/screens/setting';
+import SettingScreen from '@/screens/setting/SettingScreen';
 import useThemeStore from '@/store/useThemeStore';
 import {createStackNavigator} from '@react-navigation/stack';
 

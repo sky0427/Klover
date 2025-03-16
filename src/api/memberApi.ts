@@ -1,7 +1,8 @@
 import {Country} from '@/types';
+import {MemberDto} from '@/types/auth';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
-import {PATCH} from './commonApi';
+import {GET, PATCH} from './commonApi';
 
 const MAX_FILE_SIZE = 1; //1MB
 const MB = 1024 * 1024;
@@ -65,4 +66,13 @@ export const updateMember = async (updateParam: {
   if (body.returnCode !== '0000') {
     throw new Error(body.returnMessage);
   }
+};
+
+export interface MemberInfo {
+  memberDto: MemberDto;
+}
+
+export const getMemberInfo = async (memberId: number): Promise<MemberInfo> => {
+  const response = await GET<MemberInfo>(`/members/${memberId}`);
+  return response.data.data!;
 };

@@ -84,6 +84,12 @@ import UserRemoveFillSvg from '@/assets/icons/user_remove_2_fill.svg';
 import UserRemoveLineSvg from '@/assets/icons/user_remove_2_line.svg';
 import WarningFillSvg from '@/assets/icons/warning_fill.svg';
 import WarningLineSvg from '@/assets/icons/warning_line.svg';
+import CheckFillSvg from '@/assets/icons/check_fill.svg';
+import CheckLineSvg from '@/assets/icons/check_line.svg';
+import GridFillSvg from '@/assets/icons/grid_fill.svg';
+import GridLineSvg from '@/assets/icons/grid_line.svg';
+import Leaf3FillSvg from '@/assets/icons/leaf_3_fill.svg';
+import Leaf3LineSvg from '@/assets/icons/leaf_3_line.svg';
 
 export {
   AddFillSvg,
@@ -172,4 +178,10 @@ export {
   UserRemoveLineSvg,
   WarningFillSvg,
   WarningLineSvg,
+  CheckFillSvg,
+  CheckLineSvg,
+  GridFillSvg,
+  GridLineSvg,
+  Leaf3FillSvg,
+  Leaf3LineSvg,
 };

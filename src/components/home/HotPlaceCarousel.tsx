@@ -1,8 +1,12 @@
 import {colors} from '@/constants/colors';
+import {homeNavigations} from '@/constants/navigations';
 import {sizes, spacing} from '@/constants/theme';
+import {HomeStackParamList} from '@/navigations/stack/HomeStackNavigator';
 import useThemeStore from '@/store/useThemeStore';
 import {TourPostDto} from '@/types';
 import {ThemeMode} from '@/types/type';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useState} from 'react';
 import {
   FlatList,
@@ -20,15 +24,19 @@ const CARD_WIDTH_SPACING = CARD_WIDTH + spacing.l;
 
 interface HotPlaceCarouselProps {
   data: TourPostDto[];
-  onPress?: () => void;
 }
 
-const HotPlaceCarousel = ({data, onPress}: HotPlaceCarouselProps) => {
+const HotPlaceCarousel = ({data}: HotPlaceCarouselProps) => {
   const {theme} = useThemeStore();
   const styles = styling(theme);
+  const navigation = useNavigation<StackNavigationProp<HomeStackParamList>>();
   const [active, setActive] = useState(false);
 
-  const handlePress = () => {
+  const handlePress = (id: number) => {
+    navigation.navigate(homeNavigations.TOUR_DETAIL, {id});
+  };
+
+  const handlePressFavorite = () => {
     setActive(!active);
   };
 
@@ -47,11 +55,11 @@ const HotPlaceCarousel = ({data, onPress}: HotPlaceCarouselProps) => {
               marginLeft: spacing.width * 0.05,
               marginRight: index === data.length - 1 ? spacing.width * 0.05 : 0,
             }}
-            onPress={onPress}>
+            onPress={() => handlePress(item.contentId)}>
             <View style={[styles.card]}>
               <TouchableOpacity
                 style={[styles.button, styles.favorite]}
-                onPress={handlePress}>
+                onPress={handlePressFavorite}>
                 <CustomIcon
                   name="HeartFillSvg"
                   size={20}
@@ -62,7 +70,22 @@ const HotPlaceCarousel = ({data, onPress}: HotPlaceCarouselProps) => {
               </TouchableOpacity>
 
               <View style={styles.imageBox}>
-                <Image source={{uri: item.firstimage}} style={styles.image} />
+                {item?.firstImage ? (
+                  <Image
+                    source={{uri: item?.firstImage}}
+                    style={styles.image}
+                  />
+                ) : (
+                  <CustomIcon
+                    name="PicFillSvg"
+                    size={110}
+                    color="rgba(0, 0, 0, 0.1)"
+                    style={[
+                      styles.image,
+                      {alignItems: 'center', justifyContent: 'center'},
+                    ]}
+                  />
+                )}
               </View>
 
               <View style={styles.titleBox}>
@@ -134,8 +157,8 @@ const styling = (theme: ThemeMode) =>
       marginBottom: 8,
     },
     location: {
-      fontSize: sizes.sm,
-      color: colors[theme].TEXT,
+      fontSize: sizes.body,
+      color: colors[theme].UNCHANGE_WHITE,
     },
   });
 

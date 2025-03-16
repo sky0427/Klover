@@ -1,16 +1,15 @@
-import {View, Text, StyleSheet, Image, ImageBackground} from 'react-native';
-import React from 'react';
-import ScreenWrapper from '@/components/shared/ScreenWrapper';
-import Wrapper from '@/components/shared/Wrapper';
-import CustomButton from '@/components/shared/CustomButton';
-import useThemeStore from '@/store/useThemeStore';
-import {ThemeMode} from '@/types/type';
 import LogoDarkSvg from '@/assets/images/logo_dark.svg';
 import LogoLightSvg from '@/assets/images/logo_light.svg';
-import {useNavigation} from '@react-navigation/native';
-import {StackScreenProps} from '@react-navigation/stack';
-import {AuthStackParamList} from '@/navigations/stack/AuthStackNavigator';
+import CustomButton from '@/components/shared/CustomButton';
+import ScreenWrapper from '@/components/shared/ScreenWrapper';
+import Wrapper from '@/components/shared/Wrapper';
 import {authNavigations} from '@/constants/navigations';
+import {AuthStackParamList} from '@/navigations/stack/AuthStackNavigator';
+import useThemeStore from '@/store/useThemeStore';
+import {ThemeMode} from '@/types/type';
+import {StackScreenProps} from '@react-navigation/stack';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 
 type AuthHomeScreenProps = StackScreenProps<
   AuthStackParamList,
@@ -42,9 +41,9 @@ const AuthHomeScreen = ({navigation}: AuthHomeScreenProps) => {
       <Wrapper mb={60} style={styles.buttonContainer}>
         <CustomButton
           label="GET STARTED"
+          style={{height: 64}}
           onPress={() => navigation.navigate(authNavigations.SIGNIN)}
         />
-        <CustomButton variant="outlined" label="LOOK AROUND" />
       </Wrapper>
     </ScreenWrapper>
   );

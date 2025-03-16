@@ -17,6 +17,7 @@ const authNavigations = {
 const homeNavigations = {
   MAIN_HOME: 'MainHome',
   SEARCH: 'Search',
+  FILTER: 'Filter',
   TOUR_DETAIL: 'TourDetail',
 } as const;
 
@@ -26,10 +27,17 @@ const mapNavigations = {
   SEARCH_LOCATION: 'SearchLocation',
 } as const;
 
-const feedNavigations = {
-  FEED_HOME: 'FeedHome',
-  FEED_DETAIL: 'FeedDetail',
+const commNavigations = {
+  COMM_HOME: 'CommHome',
+  COMM_DETAIL: 'CommDetail',
   EDIT_POST: 'EditPost',
+  ADD_POST: 'AddPost',
+} as const;
+
+const commTabNavigations = {
+  COMM_HOME: 'CommTabHome',
+  COMM_FAVORITE: 'CommFavorite',
+  ADD_POST: 'AddPost',
 } as const;
 
 const settingNavigations = {
@@ -41,7 +49,8 @@ const settingNavigations = {
 
 export {
   authNavigations,
-  feedNavigations,
+  commNavigations,
+  commTabNavigations,
   homeNavigations,
   mainNavigation,
   mapNavigations,

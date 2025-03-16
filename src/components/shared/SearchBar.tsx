@@ -1,44 +1,50 @@
+import {colors} from '@/constants/colors';
+import useDebounce from '@/hooks/useDebounce';
 import useThemeStore from '@/store/useThemeStore';
 import {ThemeMode} from '@/types/type';
-import React from 'react';
-import {
-  Pressable,
-  StyleSheet,
-  TextInput,
-  TextInputProps,
-  View,
-} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {StyleSheet, TextInput, TextInputProps, View} from 'react-native';
 import CustomIcon from './CustomIcon';
-import {colors} from '@/constants/colors';
 
 interface SearchBarProps extends TextInputProps {
   placeholder?: string;
-  value?: string;
-  onChangeText?: (text: string) => void;
+  onSearch: (text: string) => void;
   FilterPress?: () => void;
-  SearchPress?: () => void;
 }
 
 const SearchBar = ({
   placeholder,
-  value,
-  onChangeText,
+  onSearch,
   FilterPress,
-  SearchPress,
   ...props
 }: SearchBarProps) => {
   const {theme} = useThemeStore();
   const styles = styling(theme);
+  const [searchText, setSearchText] = useState('');
+
+  const debouncedSearchText = useDebounce(searchText, 500);
+
+  useEffect(() => {
+    onSearch(debouncedSearchText);
+  }, [debouncedSearchText, onSearch]);
+
+  const handleTextChange = useCallback((text: string) => {
+    setSearchText(text);
+  }, []);
+
+  const handleSearchPress = useCallback(() => {
+    onSearch(searchText);
+  }, [searchText, onSearch]);
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={SearchPress}>
-        <CustomIcon
-          name="Search3LineSvg"
-          size={24}
-          color={colors[theme].PRIMARY}
-        />
-      </Pressable>
+      <CustomIcon
+        name="Search3LineSvg"
+        size={24}
+        color={colors[theme].PRIMARY}
+        onPress={handleSearchPress}
+      />
+
       <TextInput
         style={styles.text}
         autoFocus={true}
@@ -47,20 +53,20 @@ const SearchBar = ({
         keyboardType="default"
         returnKeyType="search"
         placeholder={placeholder}
-        value={value}
-        onChangeText={onChangeText}
+        value={searchText}
+        onChangeText={handleTextChange}
         spellCheck={false}
         clearButtonMode="while-editing"
         placeholderTextColor={colors[theme].GRAY_500}
         {...props}
       />
-      <Pressable onPress={FilterPress}>
-        <CustomIcon
-          name="Settings6LineSvg"
-          size={24}
-          color={colors[theme].PRIMARY}
-        />
-      </Pressable>
+
+      <CustomIcon
+        name="Settings6LineSvg"
+        size={24}
+        color={colors[theme].PRIMARY}
+        onPress={FilterPress}
+      />
     </View>
   );
 };
@@ -68,6 +74,7 @@ const SearchBar = ({
 const styling = (theme: ThemeMode) =>
   StyleSheet.create({
     container: {
+      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
       borderRadius: 16,

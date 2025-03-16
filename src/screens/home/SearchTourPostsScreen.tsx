@@ -119,7 +119,7 @@ const SearchTourPostsScreen: React.FC = () => {
       <Wrapper mb={24}>
         <SearchBar
           placeholder="search for a tour post..."
-          SearchPress={handleSearch}
+          onSearch={handleSearch}
           FilterPress={handleFilterPress}
           onChangeText={setLocalKeyword}
           onSubmitEditing={handleSearch}

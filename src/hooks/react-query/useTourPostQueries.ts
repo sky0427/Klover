@@ -1,6 +1,13 @@
-import {SearchParams, searchTourPosts, searchTourPostsInfinite} from '@/api';
+import {
+  getAreaPost,
+  getDetailTourPost,
+  getMemberCollectionTourPost,
+  SearchParams,
+  searchTourPost,
+  searchTourPosts,
+} from '@/api';
 import {queryKeys} from '@/constants/keys';
-import {KloverPage, TourPostDto, TourPostSort} from '@/types';
+import {DetailTourPostDto, KloverPage, TourPostDto} from '@/types';
 import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
 
 export const useTourPostsQuery = (params: SearchParams) => {
@@ -41,7 +48,7 @@ export const useTourPostsInfiniteQuery = (
     queryKey: ['tourPostsInfinite', params],
     queryFn: async ({pageParam = 0}: {pageParam: any}) => {
       try {
-        const response = await searchTourPostsInfinite({
+        const response = await searchTourPosts({
           ...params,
           page: pageParam,
         });
@@ -70,4 +77,66 @@ export const useTourPostsInfiniteQuery = (
   });
 
   return queryResult;
+};
+
+// 사용자 언어 & 지역 기반 관광지 데이터 조회
+export const useGetAreaPost = (
+  language: string,
+  areaCode: string,
+  page: number,
+  size: number,
+) => {
+  return useQuery({
+    queryKey: [queryKeys.GET_AREA_POST, 'area', language, areaCode, page, size],
+    queryFn: () => getAreaPost(language, areaCode, page, size),
+  });
+};
+
+// 해당 관광지 상세 조회
+export const useGetDetailTourPost = (id: number) => {
+  return useQuery<DetailTourPostDto, Error>({
+    queryKey: [queryKeys.GET_DETAIL_TOUR_POST, 'detail', id],
+    queryFn: async (): Promise<DetailTourPostDto> => {
+      const response = await getDetailTourPost(id);
+      return response;
+    },
+  });
+};
+
+// 해당 사용자가 저장한 관광지 조회
+export const useGetMemberCollectionTourPost = (
+  memberId: number,
+  page: number,
+  size: number,
+) => {
+  return useQuery({
+    queryKey: [
+      queryKeys.GET_MEMBER_COLLECTION_TOUR_POST,
+      'collection',
+      memberId,
+      page,
+      size,
+    ],
+    queryFn: () => getMemberCollectionTourPost(memberId, page, size),
+  });
+};
+
+// 사용자 언어 & 관광지명/지역명 검색
+export const useSearchTourPost = (
+  language: string,
+  keyword: string,
+  page: number,
+  size: number,
+) => {
+  return useQuery({
+    queryKey: [
+      queryKeys.SEARCH_TOUR_POST,
+      'search',
+      language,
+      keyword,
+      page,
+      size,
+    ],
+    queryFn: () => searchTourPost(language, keyword, page, size),
+  });
 };

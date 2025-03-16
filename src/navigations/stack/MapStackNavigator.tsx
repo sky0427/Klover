@@ -1,6 +1,7 @@
-import {colors} from '@/constants/colors';
 import {mapNavigations} from '@/constants/navigations';
+import AddPostScreen from '@/screens/explore/AddPostScreen';
 import ExploreScreen from '@/screens/explore/ExploreScreen';
+import SearchLocationScreen from '@/screens/explore/SearchLocationScreen';
 import useThemeStore from '@/store/useThemeStore';
 import {createStackNavigator} from '@react-navigation/stack';
 import {LatLng} from 'react-native-maps';
@@ -26,21 +27,22 @@ function MapStackNavigator() {
           headerShown: false,
         }}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name={mapNavigations.ADD_POST}
         component={AddPostScreen}
         options={{
-          headerTitle: '장소 추가',
+          headerTitle: 'Add Post',
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name={mapNavigations.SEARCH_LOCATION}
         component={SearchLocationScreen}
         options={{
-          presentation: 'modal',
-          headerTitle: '장소 검색',
+          headerTitle: 'Search Location',
+          headerShown: false,
         }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }

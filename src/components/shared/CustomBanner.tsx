@@ -28,7 +28,6 @@ const styling = (theme: ThemeMode) =>
     container: {
       width: sizes.width,
       backgroundColor: colors[theme].PRIMARY,
-      marginTop: spacing.l,
       marginBottom: spacing.xl,
       alignItems: 'center',
       justifyContent: 'center',

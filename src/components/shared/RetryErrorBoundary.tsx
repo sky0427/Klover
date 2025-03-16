@@ -13,21 +13,23 @@ const RetryErrorBoundary = ({children}: PropsWithChildren) => {
   const {reset} = useQueryErrorResetBoundary();
 
   return (
-    <ErrorBoundary
-      onReset={reset}
-      fallbackRender={({resetErrorBoundary}) => (
-        <View style={styles.container}>
-          <Text>Please try again in a moment.</Text>
-          <Text>Failed to process your request.</Text>
-          <CustomButton
-            label="Retry"
-            variant="outlined"
-            onPress={resetErrorBoundary}
-          />
-        </View>
-      )}>
-      {children}
-    </ErrorBoundary>
+    <>
+      <ErrorBoundary
+        onReset={reset}
+        fallbackRender={({resetErrorBoundary}) => (
+          <View style={styles.container}>
+            <Text>Please try again in a moment.</Text>
+            <Text>Failed to process your request.</Text>
+            <CustomButton
+              label="Retry"
+              variant="outlined"
+              onPress={resetErrorBoundary}
+            />
+          </View>
+        )}>
+        {children}
+      </ErrorBoundary>
+    </>
   );
 };
 

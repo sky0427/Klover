@@ -47,3 +47,11 @@ export enum CommPostSort {
   Like_Count = 'LIKE_COUNT',
   Distance = 'DISTANCE',
 }
+
+export type TargetObject = 'COMMPOST' | 'COMMENT';
+
+export type NotiEventType =
+  | 'COMMENT_LIKE'
+  | 'COMMENT_CREATE'
+  | 'COMMPOST_LIKE'
+  | 'ALL';

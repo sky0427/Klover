@@ -5,8 +5,9 @@ import queryClient from '@/utils/queryClient';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {NavigationContainer} from '@react-navigation/native';
 import {QueryClientProvider} from '@tanstack/react-query';
+import LineLogin from '@xmartlabs/react-native-line';
 import React, {useEffect} from 'react';
-import {StatusBar} from 'react-native';
+import Config from 'react-native-config';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Toast, {
@@ -14,8 +15,6 @@ import Toast, {
   BaseToastProps,
   ErrorToast,
 } from 'react-native-toast-message';
-import LineLogin from '@xmartlabs/react-native-line';
-import Config from 'react-native-config';
 
 const toastConfig = {
   success: (props: BaseToastProps) => (
@@ -61,16 +60,16 @@ function App(): React.JSX.Element {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <GestureHandlerRootView>
+    <GestureHandlerRootView>
+      <QueryClientProvider client={queryClient}>
         <SafeAreaProvider>
           <NavigationContainer>
             <RootNavigator />
             <Toast config={toastConfig} />
           </NavigationContainer>
         </SafeAreaProvider>
-      </GestureHandlerRootView>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }
 

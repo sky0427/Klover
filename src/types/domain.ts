@@ -1,5 +1,6 @@
 import {ImageOrVideo} from 'react-native-image-crop-picker';
-import {LatLng} from 'react-native-maps';
+import {NotiEventType, TargetObject} from './enum';
+import {MarkerColor} from './marker';
 
 export interface ApiResponse<T> {
   returnCode: string;
@@ -20,14 +21,24 @@ export interface KloverPage<T> {
   totalPages: number;
   totalCount: number;
 }
+
+export interface Marker {
+  id: number;
+  latitude: number;
+  longitude: number;
+  color: MarkerColor;
+  score: number;
+}
+
 export interface TourPostDto {
   contentId: number;
   commonPlaceId: number;
   avgRating: number;
+  reviewCount: number;
   title: string;
   overview: string;
   addr1: string;
-  firstimage?: string;
+  firstImage?: string;
   mapX: number;
   mapY: number;
 }
@@ -36,6 +47,7 @@ export interface DetailTourPostDto {
   contentId: number;
   commonPlaceId: number;
   avgRating: number;
+  reviewCount: number;
   title: string;
   addr1: string;
   firstImage?: string | undefined;
@@ -43,6 +55,16 @@ export interface DetailTourPostDto {
   mapX: number;
   mapY: number;
   overview?: string;
+  isSaved?: boolean;
+}
+
+export interface ReviewDto {
+  id: number;
+  memberId: number;
+  nickname: string;
+  content: string;
+  rating: number;
+  createDate: string;
 }
 
 export interface CommPostDto {
@@ -122,4 +144,68 @@ export interface CommentModifyRequest {
 
 export interface CommentDeleteRequest {
   commentId: number;
+}
+
+export interface CreateChatRoomRequest {
+  title: string;
+  memberIds: number[];
+}
+
+export interface ModifyChatRoomTitleRequest {
+  title: string;
+  chatRoomId: number;
+}
+
+export interface ChatRoomBatchActionRequest {
+  memberIds: number[];
+  chatRoomId: number;
+}
+
+export interface GetChatMessageRequest {
+  chatRoomId: number;
+  page: number;
+  pointTime: Date;
+}
+
+export interface WriteChatMessageRequest {
+  content: string;
+  chatRoomId: number;
+}
+
+export interface LeaveChatRoomRequest {
+  chatRoomId: number;
+}
+
+export interface ChatRoomDto {
+  id: number;
+  memberId: number;
+  title: string;
+  memberCount: number;
+}
+
+export interface ChatMessageDto {
+  id: number;
+  memberId: number;
+  nickname: number;
+  content: number;
+  imageUrls: string[];
+  readCount: number;
+  createDate: Date;
+  profileImageUrl: string;
+}
+
+export interface NotificationMessage {
+  body: string;
+  eventType: NotiEventType;
+  object: TargetObject;
+  objectId: number;
+  title: string;
+  customField: CustomField;
+}
+
+export interface CustomField {
+  actor_nickname: string;
+  content: string;
+  receiver_id: number;
+  receiver_nicknname: number;
 }

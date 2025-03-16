@@ -3,18 +3,28 @@ import {sizes, spacing} from '@/constants/theme';
 import useThemeStore from '@/store/useThemeStore';
 import {ThemeMode} from '@/types/type';
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import CustomText from '../shared/CustomText';
 
 interface SectionHeaderProps {
   title: string;
-  onPress: () => void;
+  containerStyle?: ViewStyle;
+  textStyle?: TextStyle;
+  onPress?: () => void;
   buttonLabel?: string;
   button?: boolean;
 }
 
 const SectionHeader = ({
   title,
+  containerStyle,
+  textStyle,
   onPress,
   buttonLabel = 'See All',
   button = false,
@@ -23,14 +33,14 @@ const SectionHeader = ({
   const styles = styling(theme);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <CustomText fontWeight="bold" style={styles.title}>
         {title}
       </CustomText>
       {button && (
         <TouchableOpacity onPress={onPress}>
-          <CustomText fontWeight="medium" style={styles.btnText}>
-            {button}
+          <CustomText fontWeight="medium" style={[styles.btnText, textStyle]}>
+            {buttonLabel}
           </CustomText>
         </TouchableOpacity>
       )}

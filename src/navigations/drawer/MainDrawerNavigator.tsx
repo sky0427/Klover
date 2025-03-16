@@ -1,24 +1,25 @@
 import CustomIcon from '@/components/shared/CustomIcon';
 import {mainNavigation} from '@/constants/navigations';
-import CommunityScreen from '@/screens/community';
-import MessageScreen from '@/screens/message';
-import NotificationScreen from '@/screens/notification';
+import ChatRoomScreen from '@/screens/message/ChatRoomScreen';
+import NotificationScreen from '@/screens/notification/NotificationScreen';
 import useThemeStore from '@/store/useThemeStore';
 import {ThemeMode} from '@/types/type';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigatorScreenParams} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
-import MapTestScreen from '../root/MapTestScreen';
+import CommStackNavigator from '../stack/CommStackNavigator';
 import HomeStackNavigator, {
   HomeStackParamList,
 } from '../stack/HomeStackNavigator';
-import {MapStackParamList} from '../stack/MapStackNavigator';
+import MapStackNavigator, {MapStackParamList} from '../stack/MapStackNavigator';
+import {CommTabParamList} from '../tab/CommTabNavigator';
 import CustomDrawerContent from './CustomDrawerContent';
 
 export type MainDrawerParamList = {
   [mainNavigation.HOME]: NavigatorScreenParams<HomeStackParamList>;
   [mainNavigation.EXPLORE]: NavigatorScreenParams<MapStackParamList>;
-  [mainNavigation.COMMUNITY]: undefined;
+  [mainNavigation.COMMUNITY]: NavigatorScreenParams<CommTabParamList>;
+  [mainNavigation.PROFILE]: undefined;
   [mainNavigation.SETTING]: undefined;
   [mainNavigation.NOTIFICATION]: undefined;
   [mainNavigation.MESSAGES]: undefined;
@@ -40,6 +41,9 @@ function MainDrawerNavigator() {
         drawerType: 'front',
         overlayColor: 'rgba(0, 0, 0, 0.5)',
         swipeEdgeWidth: 100,
+        drawerActiveTintColor: 'rgba(255, 255, 255, 1)',
+        drawerInactiveTintColor: 'rgba(255, 255, 255, 0.3)',
+        drawerActiveBackgroundColor: 'rgba(0, 0, 0, 0.6)',
       })}>
       <Drawer.Screen
         name={mainNavigation.HOME}
@@ -57,7 +61,7 @@ function MainDrawerNavigator() {
       />
       <Drawer.Screen
         name={mainNavigation.EXPLORE}
-        component={MapTestScreen}
+        component={MapStackNavigator}
         options={({focused}: any) => ({
           title: 'Explore',
           drawerIcon: ({color, size}) => (
@@ -71,7 +75,7 @@ function MainDrawerNavigator() {
       />
       <Drawer.Screen
         name={mainNavigation.COMMUNITY}
-        component={CommunityScreen}
+        component={CommStackNavigator}
         options={({focused}: any) => ({
           title: 'Community',
           drawerIcon: ({color, size}) => (
@@ -83,6 +87,7 @@ function MainDrawerNavigator() {
           ),
         })}
       />
+
       <Drawer.Screen
         name={mainNavigation.NOTIFICATION}
         component={NotificationScreen}
@@ -99,7 +104,7 @@ function MainDrawerNavigator() {
       />
       <Drawer.Screen
         name={mainNavigation.MESSAGES}
-        component={MessageScreen}
+        component={ChatRoomScreen}
         options={({focused}: any) => ({
           title: 'Messages',
           drawerIcon: ({color, size}) => (

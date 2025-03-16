@@ -1,7 +1,11 @@
 import {colors} from '@/constants/colors';
+import {homeNavigations} from '@/constants/navigations';
 import {sizes, spacing} from '@/constants/theme';
+import {HomeStackParamList} from '@/navigations/stack/HomeStackNavigator';
 import useThemeStore from '@/store/useThemeStore';
 import {ThemeMode} from '@/types/type';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useState} from 'react';
 import {
   FlatList,
@@ -26,16 +30,22 @@ interface Place {
 
 interface PlaceCarouselProps {
   data: Place[];
-  onPress?: () => void;
 }
 
-const PlaceCarousel = ({data, onPress}: PlaceCarouselProps) => {
+type Navigation = StackNavigationProp<HomeStackParamList>;
+
+const PlaceCarousel: React.FC<PlaceCarouselProps> = ({data}) => {
   const {theme} = useThemeStore();
   const styles = styling(theme);
+  const navigation = useNavigation<Navigation>();
   const [active, setActive] = useState(false);
 
-  const handlePress = () => {
+  const handleFavoritePress = () => {
     setActive(!active);
+  };
+
+  const handleCardPress = () => {
+    navigation.navigate(homeNavigations.FILTER);
   };
 
   return (
@@ -53,11 +63,11 @@ const PlaceCarousel = ({data, onPress}: PlaceCarouselProps) => {
               marginLeft: spacing.width * 0.05,
               marginRight: index === data.length - 1 ? spacing.width * 0.05 : 0,
             }}
-            onPress={onPress}>
+            onPress={handleCardPress}>
             <View style={[styles.card]}>
               <TouchableOpacity
                 style={[styles.button, styles.favorite]}
-                onPress={handlePress}>
+                onPress={handleFavoritePress}>
                 <CustomIcon
                   name="HeartFillSvg"
                   size={20}

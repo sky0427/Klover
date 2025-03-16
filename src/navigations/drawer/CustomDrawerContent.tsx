@@ -1,20 +1,26 @@
 import CustomIcon from '@/components/shared/CustomIcon';
 import CustomText from '@/components/shared/CustomText';
 import {colors} from '@/constants/colors';
+import {mainNavigation} from '@/constants/navigations';
 import useThemeStore from '@/store/useThemeStore';
+import useAuthStore from '@/store/zustand/useAuthStore';
 import {ThemeMode} from '@/types/type';
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
+  DrawerNavigationProp,
 } from '@react-navigation/drawer';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {MainDrawerParamList} from './MainDrawerNavigator';
+
+type Navigation = DrawerNavigationProp<MainDrawerParamList>;
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
   const {theme} = useThemeStore();
   const styles = styling(theme);
-  // const {getProfileQuery} = useAuth();
+  const {user} = useAuthStore();
 
   return (
     <View style={styles.container}>
@@ -25,20 +31,26 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
         contentContainerStyle={styles.contentContainer}>
         {/* User Profile Section */}
 
-        <View style={styles.userInfoContainer}>
+        <TouchableOpacity
+          style={styles.userInfoContainer}
+          onPress={() => props.navigation.navigate(mainNavigation.PROFILE)}>
           <View style={styles.userImageContainer}>
-            <Image
-              source={require('@/assets/images/user-default.png')}
-              style={styles.userImage}
-            />
+            {user?.profileUrl ? (
+              <Image source={{uri: user?.profileUrl}} />
+            ) : (
+              <Image
+                source={require('@/assets/images/user-default.png')}
+                style={styles.userImage}
+              />
+            )}
           </View>
           <CustomText style={styles.userName} fontWeight="semibold">
-            Jemma Ray
+            {user?.nickname}
           </CustomText>
           <CustomText style={styles.userLocation} fontWeight="regular">
-            San Francisco, USA
+            {user?.email}
           </CustomText>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.drawerItemListContainer}>
           <DrawerItemList {...props} />
@@ -50,9 +62,14 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
           key={1}
           label={({focused}) => (
             <View style={styles.drawerItemContainer}>
-              <CustomIcon name="Settings3FillSvg" />
-              <CustomText fontWeight={focused ? 'semibold' : 'regular'}>
-                Setting
+              <CustomIcon
+                name="Settings3FillSvg"
+                color="rgba(255,255,255,0.6)"
+              />
+              <CustomText
+                fontWeight={'semibold'}
+                style={{color: 'rgba(255,255,255,0.6)'}}>
+                Language
               </CustomText>
             </View>
           )}
@@ -65,8 +82,10 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
           key={2}
           label={({focused}) => (
             <View style={styles.drawerItemContainer}>
-              <CustomIcon name="ExitLineSvg" />
-              <CustomText fontWeight={focused ? 'semibold' : 'regular'}>
+              <CustomIcon name="ExitLineSvg" color={'rgba(255,255,255,0.6)'} />
+              <CustomText
+                fontWeight={'semibold'}
+                style={{color: 'rgba(255,255,255,0.6)'}}>
                 Logout
               </CustomText>
             </View>
@@ -114,6 +133,7 @@ const styling = (theme: ThemeMode) =>
     },
     drawerItemListContainer: {
       flex: 1,
+      gap: 12,
     },
     drawerItemContainer: {
       flexDirection: 'row',
@@ -127,7 +147,7 @@ const styling = (theme: ThemeMode) =>
     },
     drawerItem: {
       marginVertical: 3,
-      borderRadius: 16,
+      borderRadius: 40,
     },
   });
 

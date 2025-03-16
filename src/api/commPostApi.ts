@@ -1,7 +1,7 @@
 import {CommentDto, CommPostDetailDto, CommPostDto, KloverPage} from '@/types';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
 import {DELETE, GET, POST, PUT} from './commonApi';
-import EncryptedStorage from 'react-native-encrypted-storage';
 
 const MAX_FILE_SIZE = 10;
 const MB = 1024 * 1024;
